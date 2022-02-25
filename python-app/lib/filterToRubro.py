@@ -79,7 +79,7 @@ def saveRubros(NameRubros, data):
                                   columns=data[NameRubros[i]]['columnas'], 
                                   index=data[NameRubros[i]]['producto'])
             
-            rubros.to_csv(config.PATH_SAVE_RUBROS + 'rubro' + str(int(i)+1))
+            rubros.to_csv(config.PATH_SAVE_RUBROS + 'rubro' + str(int(i)+1) + '.csv')
         except TypeError as r: 
             print({'error': 'EN RUBROS AL GUARDAR DOCUMENTOS'})
 
