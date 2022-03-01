@@ -1,6 +1,6 @@
 from lib import pd
 from lib import config
-from lib import filterToRubro
+from lib import saveToRubros 
 from lib import Flask, Api, CORS, Resource, reqparse
 
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # del genesis
     # -------------------------------- 
     # -------------------------------- 
-    # filterToRubro.run(config.CSV_BASE_INPC)
+    # saveToRubros.run(config.CSV_BASE_INPC)
     # -------------------------------- 
     # -------------------------------- 
     app.run(debug=True)

@@ -1,5 +1,7 @@
 from lib import pd
 from lib import config
+from lib import fixeDataRubros
+from pathlib import Path
 
 
 def get_Rubros(path, fixeData=2):
@@ -84,7 +86,23 @@ def saveRubros(NameRubros, data):
             print({'error': 'EN RUBROS AL GUARDAR DOCUMENTOS'})
 
 
+def saveFixeData():
+    # En esta definicion arreglamos los datos de fecha y mes con la ayuda
+    # del modulo fixeDataRubros.py
+    for path in Path(config.PATH_SAVE_RUBROS).rglob('*.csv'):
+        openRubros = pd.read_csv(config.PATH_SAVE_RUBROS + path.name)
+        dataFixed = fixeDataRubros.run(openRubros)
+        dataFixed.to_csv(config.PATH_SAVE_RUBROS + path.name)
+    return {'res': 'Se arreglo la data de rubro[1-12].csv'}
+
+
 def run(path):
     x, y = get_Rubros(path)
+    # ----------------------------------
+    # ----------------------------------
     saveRubros(x,y)
+    # ----------------------------------
+    # ----------------------------------
+    saveFixeData()
+    # ----------------------------------
     return 
