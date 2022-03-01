@@ -90,19 +90,26 @@ def saveFixeData():
     # En esta definicion arreglamos los datos de fecha y mes con la ayuda
     # del modulo fixeDataRubros.py
     for path in Path(config.PATH_SAVE_RUBROS).rglob('*.csv'):
-        openRubros = pd.read_csv(config.PATH_SAVE_RUBROS + path.name)
+        openRubros = pd.read_csv(config.PATH_SAVE_RUBROS + path.name, index_col = 0)
         dataFixed = fixeDataRubros.run(openRubros)
         dataFixed.to_csv(config.PATH_SAVE_RUBROS + path.name)
     return {'res': 'Se arreglo la data de rubro[1-12].csv'}
 
 
 def run(path):
-    x, y = get_Rubros(path)
-    # ----------------------------------
-    # ----------------------------------
-    saveRubros(x,y)
-    # ----------------------------------
-    # ----------------------------------
-    saveFixeData()
-    # ----------------------------------
-    return 
+    '''
+    [Args]
+        [path : str] : [path de nuestro CSV Base_INPC_1969_2021]
+    '''
+    try:
+        x, y = get_Rubros(path)
+        # ----------------------------------
+        # ----------------------------------
+        saveRubros(x,y)
+        # ----------------------------------
+        # ----------------------------------
+        saveFixeData()
+        # ----------------------------------
+        return {'res': 'Todo bien al salvar y arreglar los documentos'}
+    except TypeError:
+        return {'res':'recuerda poner el path de config.CSV_BASE_INPC'}

@@ -15,7 +15,7 @@ def search(nameRubro, jahr, mes=None):
         [result : DataFrame] : [nos regresa la columna que andamos buscando]
     '''
     try: 
-        df = pd.read_csv(config.PATH_SAVE_RUBROS + nameRubro + '.csv')
+        df = pd.read_csv(config.PATH_SAVE_RUBROS + nameRubro + '.csv', index_col=0)
         # re.split(r',| ', nameString)
 
         if mes == None: 
