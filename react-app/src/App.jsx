@@ -1,11 +1,12 @@
 import React from 'react'
-import Boton from './components/botones/boton'
-import Introf from './components/paginas/intro'
+import PagPeriodo from './components/paginas/pagPeriodo'
 
 function App() {
-
+// SetTemporalidad
   return (
-	  <Introf />
+	  <div>
+		  <PagPeriodo />
+	  </div>
   )
 }
 

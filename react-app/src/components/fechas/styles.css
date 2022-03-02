@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap");
+
+p {
+	margin: 0;
+
+}
+
+.clip-contents {
+	overflow: hidden;
+
+}
+
+.flex-col-hstart-vstart {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+
+}
+
+.flex-col-hcenter {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+
+.flex-row-vend-hstart {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
+
+}
+
+.flex-hcenter {
+	justify-content: center;
+
+}
+.arrow {
+	  border: solid black;
+	  border-width: 0 3px 3px 0;
+	  display: inline-block;
+	  padding: 3px;
+
+  }
+
+  .up {
+	  transform: rotate(-135deg);
+	  -webkit-transform: rotate(-135deg);
+
+  }
+
+  .down {
+	  transform: rotate(45deg);
+	  -webkit-transform: rotate(45deg);
+
+  }
+
