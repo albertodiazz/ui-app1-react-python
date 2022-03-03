@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import "./styles.css"
 
+
 export default function SetPeriodo(props) {
 	/*
 	 * Cuand presionamos el boton calcular este nos envia la data para 
@@ -38,9 +39,15 @@ export default function SetPeriodo(props) {
 	1.- El jahr lo estamos agarrando de forma dinamica
 	*/	
 
+	const [hidden, setHidden] = useState(()=>{
+		// On/Off : parea setear visibilidad
+		return props.setVisibilityClick == 'On' ? false : true 
+	})
+
 	const [countJahr, setCount] = useState(inicioDatos);	
 	// Aqui decidimos en que me empezamos
 	const [countMeses, setCountMeses] = useState(0)
+
 
 	const increase = () =>{
 
@@ -57,18 +64,17 @@ export default function SetPeriodo(props) {
 	}
 
 	// var llamada1 = decrease()
-	
 
+	// TODO: 
+	// 1. logica de programacion de slave para que cuando un mes avanze el otro se haga en 
+	// automatico recuerda que el prop es setMode='Slave' 
 	return (
 		<div className="flex-col-hstart-vstart">
-			<button onClick={ increase } className="arrow up">
-			</button>
+			{ !hidden && <button onClick={ increase } className="arrow up"> </button> } 
 			<strong>{ props.setPeriodo == 'Mes' ? meses[countMeses] : countJahr }</strong>
-			<button onClick= { () => decrease(inicioDatos) } className="arrow down">
-			</button>
+			{ !hidden && <button onClick= { () => decrease(inicioDatos) } className="arrow down"></button> }
 		</div>
 
 	)
 
 }
-

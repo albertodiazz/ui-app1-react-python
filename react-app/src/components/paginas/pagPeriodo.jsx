@@ -1,20 +1,36 @@
-import React from "react"
+import React, { useContext } from "react"
 import ReactDOM from "react-dom";
-import SetPeriodo from '../fechas/setPeriodo'
+import "../fechas/styles.css"
+import SetPeriodo from  '../fechas/setPeriodo'
 
 
-export default function PagPeriodo(){
+const PagPeriodo = (props) => {
 	/*
 	 * En esta pagina tenemos:
-	 * 1.- Seleccion de Temporalidad : [setPeriodo : str] ['Mes', 'Ano']
-	 * 2.- Establece un periodo : [get_Mes, get_Ano : str]
-		* * */
+	 * 2.- Establece un periodo  
+	 * * */
 
 	return (
-		<div className="Botones-Temporalidad">
-			<SetPeriodo setPeriodo={'Mes'} />
+		<div className="Temporalidades">
+			<div className="boton-Mes" >
+				<SetPeriodo setPeriodo={'Mes'} setVisibilityClick={ 'On' } />
+				<strong> </strong>
+			</div>
+			<div className="boton-Year">
+				<SetPeriodo className='year' setPeriodo={'Ano'} setVisibilityClick={ 'On' } />
+			</div>
+
+			<div className="cambio-automatico-Mes" >
+				<SetPeriodo setPeriodo={'Mes'} setVisibilityClick={ 'Off' } setMode={ 'Slave' } />
+			</div>
+			<div className="cambio-automatico-Year">
+				<SetPeriodo className='year' setPeriodo={'Ano'} setVisibilityClick={ 'Off' } setMode={ 'Slave' }/>
+			</div>
+
 		</div>
 
 	)
 
 }
+
+export default PagPeriodo

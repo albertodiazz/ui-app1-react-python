@@ -39,22 +39,52 @@ p {
 
 }
 .arrow {
-	  border: solid black;
-	  border-width: 0 3px 3px 0;
-	  display: inline-block;
-	  padding: 3px;
+	border: solid black;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
 
-  }
+}
 
-  .up {
-	  transform: rotate(-135deg);
-	  -webkit-transform: rotate(-135deg);
+.up {
+	transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
 
-  }
+}
 
-  .down {
-	  transform: rotate(45deg);
-	  -webkit-transform: rotate(45deg);
+.down {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
 
-  }
+}
 
+.boton-Mes{
+	position: absolute;
+	width: 224px;
+	height: 104px;
+	left: 480px;
+	top: 148px;
+
+}
+
+.boton-Year{
+	position: absolute;
+	width: 324px;
+	left: 580px;
+	top: 148px;
+
+}
+.cambio-automatico-Mes{
+	position: absolute;
+	width: 324px;
+	left: 680px;
+	top: 148px;
+
+}
+.cambio-automatico-Year{
+	position: absolute;
+	width: 324px;
+	left: 780px;
+	top: 148px;
+
+}

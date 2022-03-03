@@ -5,9 +5,9 @@ import SetPeriodo from './setPeriodo'
 
 
 export default function SetTemporalidad(){
-	/*
-	 * Aqui seteamos los rangos a mes y ano para los botones de periodo
-		* */
-	
+
+	// TODO:
+	// 1. Generar botones que seten la busqueda a mensual y anual
+	// 2. Pasar las variables a pagPeriodo.jsx
 
 } 
