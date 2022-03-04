@@ -1,6 +1,0 @@
-@font-face{
-	font-family: "CustomFont";
-	src : local("CustomFont"), 
-	      url: ('./fonts/fontawesome-free-5.15.4-web/webfonts/fa-solid-900.woff2') format ('woff2'),
-	      url: ('./fonts/fontawesome-free-5.15.4-web/webfonts/fa-solid-900.woff') format ('woff');
-}

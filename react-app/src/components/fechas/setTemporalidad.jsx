@@ -8,7 +8,7 @@ import { MusicPlayerContext  } from "../context";
 const SetTemporalidad = () => {
 
 	// TODO:
-	// [] Generar botones que seten la busqueda a mensual y anual
+	// [x] Generar botones que seten la busqueda a mensual y anual
 	// [] Pasar las variables a pagPeriodo.jsx
 
 	const [change, setChange] = useState('')
