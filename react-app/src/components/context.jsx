@@ -1,9 +1,22 @@
-import React, { useContext, createContext } from 'react'
-
-export const GET_MES = createContext()
-export const GET_YEAR = createContext()
-export const GET_TEMP = createContext()
+import React, { useState, useContext, createContext } from 'react'
 
 
+const MusicPlayerContext = React.createContext([{}, () => {}]);
+
+
+const MusicPlayerProvider = (props) => {
+
+	const [state, setState] = useState({})
+
+	return (
+		<MusicPlayerContext.Provider value={[state, setState]}>
+			{props.children}
+		</MusicPlayerContext.Provider>
+
+	);
+
+}
+
+export { MusicPlayerContext, MusicPlayerProvider  };
 
 

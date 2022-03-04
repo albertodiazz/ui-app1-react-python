@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react"
 import ReactDOM from "react-dom";
 import "../fechas/styles.css"
 import SetPeriodo from  '../fechas/setPeriodo'
-import { GET_MES, GET_YEAR, GET_TEMP } from '../context'
+import SetTemporalidad from  '../fechas/setTemporalidad'
+import { MusicPlayerContext  } from "../context";
 
 
 const PagPeriodo = (props) => {
@@ -66,32 +67,46 @@ const PagPeriodo = (props) => {
 		countJahr <= _inicio_ + 1 ? setHiddenDownYear(true) : setHiddenDownYear(false)
 	}
 
-
+	// TODO 
+	// [] solucionar este desmadre de los contexto, por el momento ya pase de context jsx 
+	//    Ya lo tengo seteado en setTemporalidad igual que el state de la linea +10
+	// ESTUDIA ESTE DOCUMENTO:
+	// -----------------------------------
+	// https://upmostly.com/tutorials/how-to-use-the-usecontext-hook-in-react
+	//------------------------------------
+	
+	const [state, setState] = useContext(MusicPlayerContext);
 
 	return (
 		<div className="Temporalidades">
-			<div className="boton-Mes" >
-				{ !hiddenUp && <button onClick={ increaseMeses } className="arrow up"> </button> } 
-				<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
-				{ !hiddenDown && <button onClick= { decreaseMeses } className="arrow down"></button> } 
-			</div>
-			<div className="boton-Year">
-				{ !hiddenUpYear && <button onClick={ increaseYear } className="arrow up"> </button> } 
-				<SetPeriodo className='year' years={ countJahr } />
-				{ !hiddenDownYear && <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down"></button> } 
-			</div>
+			<button onClick={() => setState(state => ({ ...state, name: 'Contexto B'  }))}>
+				{state.name}
+			</button>
+			<strong> {state.name} </strong> 
 
-			<div className="cambio-automatico-Mes" >
-				{mesRestart
-						? <SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses + 1] } /> 
-						: <SetPeriodo setPeriodo={'Mes'} meses={ meses[0] } />
-				}
-			</div>
-			<div className="cambio-automatico-Year">
-				<SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr + 1 } />
-			</div>
+				<SetTemporalidad />
+				<div className="boton-Mes" >
+					{ !hiddenUp && <button onClick={ increaseMeses } className="arrow up"> </button> } 
+					<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
+					{ !hiddenDown && <button onClick= { decreaseMeses } className="arrow down"></button> } 
+				</div>
+				<div className="boton-Year">
+					{ !hiddenUpYear && <button onClick={ increaseYear } className="arrow up"> </button> } 
+					<SetPeriodo className='year' years={ countJahr } />
+					{ !hiddenDownYear && <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down"></button> } 
+				</div>
 
-		</div>
+				<div className="cambio-automatico-Mes" >
+					{mesRestart
+							? <SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses + 1] } /> 
+							: <SetPeriodo setPeriodo={'Mes'} meses={ meses[0] } />
+					}
+						</div>
+						<div className="cambio-automatico-Year">
+							<SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr + 1 } />
+						</div>
+
+					</div>
 
 	)
 
