@@ -1,22 +1,23 @@
 import React, { useState, useContext, createContext } from 'react'
 
 
-const MusicPlayerContext = React.createContext([{}, () => {}]);
+const MyContext = React.createContext([{}, () => {}]);
 
 
-const MusicPlayerProvider = (props) => {
+const MyContextProvider = (props) => {
 
 	const [state, setState] = useState({})
+	// temporlidad : string [mes, year]
 
 	return (
-		<MusicPlayerContext.Provider value={[state, setState]}>
+		<MyContext.Provider value={[state, setState]}>
 			{props.children}
-		</MusicPlayerContext.Provider>
+		</MyContext.Provider>
 
 	);
 
 }
 
-export { MusicPlayerContext, MusicPlayerProvider  };
+export { MyContext, MyContextProvider  };
 
 

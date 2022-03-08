@@ -4,7 +4,7 @@ from lib import re
 def correcion_meses(msg):
     '''
     Las personas del mide cambiaron nomenclatura en su excel por ejemplo 
-    existen estos diferentes tipos de columnas | Jan-91 | Ene-91 | Jan 91
+    existen estos diferentes tipos de columnas | Jan-91 | Ene-91 | Jan 91 | Ene-2019
     
     [Return]
         [array]

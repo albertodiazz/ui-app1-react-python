@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react"
+import React, { useEffect, useContext, useState } from "react"
 import ReactDOM from "react-dom";
 import "../fechas/styles.css"
 import SetPeriodo from  '../fechas/setPeriodo'
 import SetTemporalidad from  '../fechas/setTemporalidad'
-import { MusicPlayerContext  } from "../context";
-
+import { MyContext  } from "../context";
+import SendDatos, { Msg_json } from "../request/sendDatos" 
 
 const PagPeriodo = (props) => {
 	// TODO:
@@ -12,6 +12,9 @@ const PagPeriodo = (props) => {
 	// [] las flechas del seteo mensual desaparecen
 	// [] y existe la exepcion del 2022 que solo tiene hasta el mes entrante hay que
 	//    recordar que eso cambia con el tiempo
+	//
+	//    NOTA: Ya estoy recibiendo la respuesta de python en el boton de request que hice 
+	
 	const inicioDatos=1969;
 	const meses = [
 		'Enero', 
@@ -37,8 +40,12 @@ const PagPeriodo = (props) => {
 	const [hiddenUp, setHiddenUp] = useState(false)
 	const [hiddenDown, setHiddenDown] = useState(true)
 	const [mesRestart, setMesReset] = useState(true) 
+	const [modeToGetData, setToGetData] = useState(true) 
 	const [hiddenUpYear, setHiddenUpYear] = useState(false)
 	const [hiddenDownYear, setHiddenDownYear] = useState(true)
+
+	// para acceder a las variables recuerda ocupar state.temporalidad	
+	const [state, setState] = useContext(MyContext);
 
 	const increaseMeses = () =>{
 		setHiddenDown(false)
@@ -66,47 +73,37 @@ const PagPeriodo = (props) => {
 		countJahr <= _inicio_ ? setCount(_inicio_) : setCount(countJahr - 1)
 		countJahr <= _inicio_ + 1 ? setHiddenDownYear(true) : setHiddenDownYear(false)
 	}
-
-	// TODO 
-	// [] solucionar este desmadre de los contexto, por el momento ya pase de context jsx 
-	//    Ya lo tengo seteado en setTemporalidad igual que el state de la linea +10
-	// ESTUDIA ESTE DOCUMENTO:
-	// -----------------------------------
-	// https://upmostly.com/tutorials/how-to-use-the-usecontext-hook-in-react
-	//------------------------------------
 	
-	const [state, setState] = useContext(MusicPlayerContext);
+	useEffect(() => {    
+		state.temporalidad == 'year' ? setToGetData(true) : setToGetData(false)
+	});
 
 	return (
 		<div className="Temporalidades">
-			<button onClick={() => setState(state => ({ ...state, name: 'Contexto B'  }))}>
-				{state.name}
-			</button>
-			<strong> {state.name} </strong> 
+			<button onClick={() => Msg_json().then(res => { console.log(res.lastMes) }) }> Send Request </button>
+			<SetTemporalidad />
+			<div className="boton-Mes" >
+				{ (!hiddenUp && state.temporalidad == 'mes') && <button onClick={ increaseMeses } className="arrow up"> </button> } 
+				<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
+				{ !hiddenDown && <button onClick= { decreaseMeses } className="arrow down"></button> } 
+			</div>
+			<div className="boton-Year">
+				{ !hiddenUpYear && <button onClick={ increaseYear } className="arrow up"> </button> } 
+				<SetPeriodo className='year' years={ countJahr } />
+				{ !hiddenDownYear && <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down"></button> } 
+			</div>
 
-				<SetTemporalidad />
-				<div className="boton-Mes" >
-					{ !hiddenUp && <button onClick={ increaseMeses } className="arrow up"> </button> } 
-					<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
-					{ !hiddenDown && <button onClick= { decreaseMeses } className="arrow down"></button> } 
-				</div>
-				<div className="boton-Year">
-					{ !hiddenUpYear && <button onClick={ increaseYear } className="arrow up"> </button> } 
-					<SetPeriodo className='year' years={ countJahr } />
-					{ !hiddenDownYear && <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down"></button> } 
-				</div>
-
-				<div className="cambio-automatico-Mes" >
-					{mesRestart
-							? <SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses + 1] } /> 
-							: <SetPeriodo setPeriodo={'Mes'} meses={ meses[0] } />
-					}
-						</div>
-						<div className="cambio-automatico-Year">
-							<SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr + 1 } />
-						</div>
-
+			<div className="cambio-automatico-Mes" >
+				{mesRestart
+						? <SetPeriodo setPeriodo={'Mes'} mode= {modeToGetData} meses={ meses[countMeses + 1] } /> 
+						: <SetPeriodo setPeriodo={'Mes'}  mode= {modeToGetData} meses={ meses[0] } />
+				}
 					</div>
+					<div className="cambio-automatico-Year">
+						<SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr + 1 } />
+					</div>
+
+				</div>
 
 	)
 

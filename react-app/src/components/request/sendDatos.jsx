@@ -1,18 +1,17 @@
-import React, { useState } from "react"
+import React from "react"
 
-export default function SendDatos(msg) {
 
-	var jsonData = {
-		'mesA': '',
-		'yearA': '',
-		'mesB': '',
-		'yearB': ''
+export async function Msg_json(){
+	// TODO
+	// [] Seter los mensaje ha mandar a la api	
+	//
+	//
+	var getLastDates= {
+		'getLastDates': 'run'
 	}	
 
 
-
-	// Send data to the backend via POST
-	fetch('http://localhost:5000/fechas', {  // Enter your IP address here
+	const responnse = await fetch('http://localhost:5000/get_last', {  // Enter your IP address here
 		method: 'POST', 
 		headers: {
 			'Host': 'localhost:5000',
@@ -21,7 +20,29 @@ export default function SendDatos(msg) {
 			'Access-Control-Allow-Origin': '*'
 		},
 		mode: 'cors', 
-		body: JSON.stringify(msg) // body data type must match "Content-Type" header
+		body: JSON.stringify(getLastDates) // body data type must match "Content-Type" header
 	})
+
+	const res = await responnse.json()
+	return res
+
+}
+
+
+export default function SendDatos() {
+
+	var jsonData = {
+		'mesA': '',
+		'yearA': '',
+		'mesB': '',
+		'yearB': ''
+	}
+	var getLastDates= {
+		'getLastDates': 'run'
+	}	
+
+
+
+	// Send data to the backend via POST
 }
 

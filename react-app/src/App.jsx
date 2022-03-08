@@ -1,16 +1,16 @@
 import React from 'react'
 import PagPeriodo from './components/paginas/pagPeriodo'
-import { MusicPlayerProvider  } from "./components/context";
+import { MyContextProvider } from "./components/context";
 
 
 function App() {
 	// SetTemporalidad
 	return (
-		<MusicPlayerProvider>
+		<MyContextProvider>
 			<div>
 				<PagPeriodo />
 			</div>
-		</MusicPlayerProvider>
+		</MyContextProvider>
 	)
 }
 

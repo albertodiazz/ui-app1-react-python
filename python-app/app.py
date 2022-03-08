@@ -1,8 +1,9 @@
 from lib import pd
 from lib import config
 from lib import saveToRubros 
-from lib import Flask, Api, CORS, Resource, reqparse
+from lib import Flask, Api, CORS, Resource, reqparse, jsonify
 import json
+from lib import getLastMonthYear
 
 
 app = Flask(__name__, template_folder='template/')
@@ -17,6 +18,7 @@ api_call.add_argument('mesA', type=str)
 api_call.add_argument('yearA', type=str)
 api_call.add_argument('mesB', type=str)
 api_call.add_argument('yearB', type=str)
+api_call.add_argument('getLastDates', type=str)
 
 
 def saveJson(datosIn):
@@ -34,6 +36,8 @@ class rangosDeFechas(Resource):
         file = open(path)
         data = json.load(file)
         args = api_call.parse_args()
+        # TODO
+        # [] regresar las fechas en jsonify
         # ------------------------------------------------------
         data['Temporalidad']['mesA'] = args['mesA'] if args['mesA'] is not None else data['Temporalidad']['mesA'] 
         data['Temporalidad']['mesB'] = args['mesB'] if args['mesB'] is not None else data['Temporalidad']['mesB'] 
@@ -45,7 +49,21 @@ class rangosDeFechas(Resource):
         print(args['mesA'], args['mesB'])
 
 
+class getData(Resource):
+    def post(self):
+        args = api_call.parse_args()
+        # ------------------------------------------------------
+        # getLastDates=run
+        data = getLastMonthYear.run() if args['getLastDates'] is not None else '400' 
+        # ------------------------------------------------------
+        print(data)
+        return jsonify(data) 
+
+
+# ---------------------------------------------
 api.add_resource(rangosDeFechas,'/fechas')
+api.add_resource(getData,'/get_last')
+# --------------------------------------------
 
 
 if __name__ == '__main__':
