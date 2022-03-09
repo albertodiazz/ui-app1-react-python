@@ -7,7 +7,6 @@ import { MyContext  } from "../context";
 
 const SetTemporalidad = () => {
 
-	// TODO:
 	// [x] Generar botones que seten la busqueda a mensual y anual
 	// [x] Pasar las variables a pagPeriodo.jsx
 	// [] Estilos

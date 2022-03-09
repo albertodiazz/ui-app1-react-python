@@ -1,10 +1,15 @@
 import React from 'react'
-import SendDatos from "../request/sendDatos"
+import { Msg_Busqueda } from "../request/sendDatos" 
 
 
-export default BtnCalcular(props){
+export default function BtnCalcular(props){
 
 	// TODO: 
-	// 1. Pasar variables de Periodo a este contexo
-	// 2. Generar boton y enviar con sendDatos('msg': 'res') los datos
+	// [] Generar boton y enviar con sendDatos('msg': 'res') los datos
+	// [] Pasar variables de rango de busqueda
+	return(
+		<div className='btn-Calcular'>
+			<button onClick={ Msg_Busqueda }>Calcular</button>
+		</div>
+	)
 }

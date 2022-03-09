@@ -4,11 +4,14 @@ import re
 
 
 def search(nameRubro, jahr, mes=None):
+    # [] son dos documentos el anual y el mensual, recuerda que el consumo de 
+    #    de datos en base al seteo anual o mensual en base al UI
     '''
     Funcion en donde devolvemos los rangos de fechas
 
     [Args]
-        [jahr : int] = [dont colocamos el ano]
+        [nameRubto: str] = [colocamos el rubro ejemplo: 'rubro1']
+        [jahr : int] = [colocamos el year ejemplo: 1991]
         [mes : str] = [Es opcional ya que no siempre elejimos el mes
                         sin embargo el jahr siempre lo elejimos]
     [Return]  
@@ -39,9 +42,9 @@ def search(nameRubro, jahr, mes=None):
                     print('Date Inicio: {0}'.format(srch))
                     return result
 
-                return {'res': 'No existe el ano que tratas de selccionar'}
+                return {'res': 'No existe el year que tratas de selccionar'}
             except KeyError:
-                return {'res': 'El ano o el mes estan mal'}
+                return {'res': 'El year o el mes estan mal'}
         else:
            try: 
                # Significa que esta en el modo de eleccion mes + jahr             
@@ -50,7 +53,7 @@ def search(nameRubro, jahr, mes=None):
                result = df.loc[:, [mesSearch]] 
                return result
            except KeyError:
-                return {'res': 'El ano o el mes estan mal'}
+                return {'res': 'El year o el mes estan mal 2'}
 
     except FileNotFoundError:
         print({'res': 'No existe el rubro que buscas'})

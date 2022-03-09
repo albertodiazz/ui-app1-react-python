@@ -1,17 +1,16 @@
 import React, { useEffect, useContext, useState } from "react"
 import ReactDOM from "react-dom";
-import "../fechas/styles.css"
 import SetPeriodo from  '../fechas/setPeriodo'
 import SetTemporalidad from  '../fechas/setTemporalidad'
+import BtnCalcular from  '../fechas/btnCalcular'
 import { MyContext  } from "../context";
-import SendDatos, { Msg_json } from "../request/sendDatos" 
+import { Msg_Temporalidad } from "../request/sendDatos" 
 
 const PagPeriodo = (props) => {
-	// TODO:
-	// [] seter comportamiento anual, tiene temporalidades de Enero a Diciembre
-	// [] las flechas del seteo mensual desaparecen
-	// [] y existe la exepcion del 2022 que solo tiene hasta el mes entrante hay que
+	// [x] seter comportamiento anual, tiene temporalidades de Enero a Diciembre 
+	//    existe la exepcion del 2022 que solo tiene hasta el mes entrante hay que
 	//    recordar que eso cambia con el tiempo
+	// [x] las flechas del seteo mensual desaparecen
 	//
 	//    NOTA: Ya estoy recibiendo la respuesta de python en el boton de request que hice 
 	
@@ -44,6 +43,15 @@ const PagPeriodo = (props) => {
 	const [hiddenUpYear, setHiddenUpYear] = useState(false)
 	const [hiddenDownYear, setHiddenDownYear] = useState(true)
 
+	const [mesDinamico, setMesDinamico] = useState('Diciembre')
+
+	// ------------------------------------------------------------------------------------------
+	const [lastMes, setLastMes] = useState( () => { Msg_Temporalidad().then(res => { setLastMes(res.lastMes) }) } ) 
+	const [lastYear, setLastYear] = useState( () => { Msg_Temporalidad().then(res => { setLastYear(res.lastYear) }) } ) 
+	const prevLastMes = lastMes
+	const prevLastYear = lastYear 
+	// ------------------------------------------------------------------------------------------
+
 	// para acceder a las variables recuerda ocupar state.temporalidad	
 	const [state, setState] = useContext(MyContext);
 
@@ -62,14 +70,16 @@ const PagPeriodo = (props) => {
 	}
 	const increaseYear = () =>{
 		setHiddenDownYear(false)
-		var fechaActual = new Date()
-		var jahrActual = fechaActual.getFullYear()
+		// OJO aqui estamos agarrando el ultimo dato del yeari seteado en su csv
+		var jahrActual = lastYear 
 		countJahr >= jahrActual ? setCount(jahrActual) : setCount(countJahr + 1)
-		countJahr >= jahrActual - 2 ? setHiddenUpYear(true) : setHiddenUpYear(false)
+		countJahr >= jahrActual - 1 ? setHiddenUpYear(true) : setHiddenUpYear(false)
+		countJahr >= jahrActual - 1 ? setMesDinamico(lastMes) : setMesDinamico('Diciembre') 
 	}
 
 	const decreaseYear = (_inicio_) =>{
 		setHiddenUpYear(false)
+		setMesDinamico('Diciembre')
 		countJahr <= _inicio_ ? setCount(_inicio_) : setCount(countJahr - 1)
 		countJahr <= _inicio_ + 1 ? setHiddenDownYear(true) : setHiddenDownYear(false)
 	}
@@ -80,7 +90,6 @@ const PagPeriodo = (props) => {
 
 	return (
 		<div className="Temporalidades">
-			<button onClick={() => Msg_json().then(res => { console.log(res.lastMes) }) }> Send Request </button>
 			<SetTemporalidad />
 			<div className="boton-Mes" >
 				{ (!hiddenUp && state.temporalidad == 'mes') && <button onClick={ increaseMeses } className="arrow up"> </button> } 
@@ -95,15 +104,21 @@ const PagPeriodo = (props) => {
 
 			<div className="cambio-automatico-Mes" >
 				{mesRestart
-						? <SetPeriodo setPeriodo={'Mes'} mode= {modeToGetData} meses={ meses[countMeses + 1] } /> 
-						: <SetPeriodo setPeriodo={'Mes'}  mode= {modeToGetData} meses={ meses[0] } />
+						? <SetPeriodo setPeriodo={'Mes'} mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[countMeses + 1] } /> 
+						: <SetPeriodo setPeriodo={'Mes'}  mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[0] } />
 				}
 					</div>
 					<div className="cambio-automatico-Year">
-						<SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr + 1 } />
-					</div>
+						{modeToGetData
+								? <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr } />
+								: <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr } />
+						}
+							</div>
+							<div className='btn-Calcular pagPeriodo'>
+								<BtnCalcular />
+						</div>
 
-				</div>
+						</div>
 
 	)
 
