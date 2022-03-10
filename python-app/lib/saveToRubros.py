@@ -112,4 +112,4 @@ def run(path):
         # ----------------------------------
         return {'res': 'Todo bien al salvar y arreglar los documentos'}
     except TypeError:
-        return {'res':'recuerda poner el path de config.CSV_BASE_INPC'}
+        return {'res':'recuerda poner el path de config.INPC_mensual or INPC_anual'}

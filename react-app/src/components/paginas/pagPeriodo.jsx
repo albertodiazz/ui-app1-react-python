@@ -4,7 +4,7 @@ import SetPeriodo from  '../fechas/setPeriodo'
 import SetTemporalidad from  '../fechas/setTemporalidad'
 import BtnCalcular from  '../fechas/btnCalcular'
 import { MyContext  } from "../context";
-import { Msg_Temporalidad } from "../request/sendDatos" 
+import { Msg_GetLasDates } from "../request/sendDatos" 
 
 const PagPeriodo = (props) => {
 	// [x] seter comportamiento anual, tiene temporalidades de Enero a Diciembre 
@@ -46,10 +46,10 @@ const PagPeriodo = (props) => {
 	const [mesDinamico, setMesDinamico] = useState('Diciembre')
 
 	// ------------------------------------------------------------------------------------------
-	const [lastMes, setLastMes] = useState( () => { Msg_Temporalidad().then(res => { setLastMes(res.lastMes) }) } ) 
-	const [lastYear, setLastYear] = useState( () => { Msg_Temporalidad().then(res => { setLastYear(res.lastYear) }) } ) 
-	const prevLastMes = lastMes
-	const prevLastYear = lastYear 
+	// const [lastMes, setLastMes] = useState( () => { Msg_GetLasDates().then(res => { setLastMes(res.lastMes) }) } ) 
+	// const [lastYear, setLastYear] = useState( () => { Msg_GetLasDates().then(res => { setLastYear(res.lastYear) }) } ) 
+	// const prevLastMes = lastMes
+	// const prevLastYear = lastYear 
 	// ------------------------------------------------------------------------------------------
 
 	// para acceder a las variables recuerda ocupar state.temporalidad	
@@ -71,10 +71,10 @@ const PagPeriodo = (props) => {
 	const increaseYear = () =>{
 		setHiddenDownYear(false)
 		// OJO aqui estamos agarrando el ultimo dato del yeari seteado en su csv
-		var jahrActual = lastYear 
+		var jahrActual = state.lastYear 
 		countJahr >= jahrActual ? setCount(jahrActual) : setCount(countJahr + 1)
 		countJahr >= jahrActual - 1 ? setHiddenUpYear(true) : setHiddenUpYear(false)
-		countJahr >= jahrActual - 1 ? setMesDinamico(lastMes) : setMesDinamico('Diciembre') 
+		countJahr >= jahrActual - 1 ? setMesDinamico(state.lastMonth) : setMesDinamico('Diciembre') 
 	}
 
 	const decreaseYear = (_inicio_) =>{
@@ -90,7 +90,6 @@ const PagPeriodo = (props) => {
 
 	return (
 		<div className="Temporalidades">
-			<SetTemporalidad />
 			<div className="boton-Mes" >
 				{ (!hiddenUp && state.temporalidad == 'mes') && <button onClick={ increaseMeses } className="arrow up"> </button> } 
 				<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
@@ -115,7 +114,7 @@ const PagPeriodo = (props) => {
 						}
 							</div>
 							<div className='btn-Calcular pagPeriodo'>
-								<BtnCalcular />
+								<BtnCalcular mes={ meses[countMeses] } year={ countJahr } />
 						</div>
 
 						</div>

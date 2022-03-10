@@ -22,7 +22,7 @@ def correcion_meses(msg):
         'Nov': 'Nov',
         'Dic': 'Dec'
     }
-    inglesTosEspano = {
+    inglesToEspanol = {
         'Jan': 'Ene',
         'Feb': 'Feb',
         'Mar': 'Mar',
@@ -36,7 +36,7 @@ def correcion_meses(msg):
         'Dec': 'Dic'
     }
     
-    correciones = espanoToIngles
+    correciones = inglesToEspanol 
     msg = re.split(r'-| ', msg)
     mes = msg[0]
     # jahr = '19'+msg[1]

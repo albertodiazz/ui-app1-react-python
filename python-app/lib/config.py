@@ -1,4 +1,6 @@
-CSV_BASE_INPC = '/mnt/d/trabajo/cocay/ramodelacion_Mide/2_4_mide_inflacion/python-app/data/genesis/Base_INPC_1969_2021_completa_1.csv'
+INPC_MENSUAL = '/mnt/d/trabajo/cocay/ramodelacion_Mide/2_4_mide_inflacion/python-app/data/genesis/INPC_mensual.csv'
+INPC_ANUAL = '/mnt/d/trabajo/cocay/ramodelacion_Mide/2_4_mide_inflacion/python-app/data/genesis/INPC_anual.csv'
 
 PATH_SAVE_RUBROS = 'data/rubros/'
 
+PATH_JSON = 'data/json/request.json'
