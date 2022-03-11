@@ -6,14 +6,10 @@ import BtnCalcular from  '../fechas/btnCalcular'
 import { MyContext  } from "../context";
 import { Msg_GetLasDates } from "../request/sendDatos" 
 
+
 const PagPeriodo = (props) => {
-	// [x] seter comportamiento anual, tiene temporalidades de Enero a Diciembre 
-	//    existe la exepcion del 2022 que solo tiene hasta el mes entrante hay que
-	//    recordar que eso cambia con el tiempo
-	// [x] las flechas del seteo mensual desaparecen
-	//
-	//    NOTA: Ya estoy recibiendo la respuesta de python en el boton de request que hice 
-	
+	// [x] Logica de mensual, al llegar el year actual necesitamos poner un seguro en los meses
+
 	const inicioDatos=1969;
 	const meses = [
 		'Enero', 
@@ -44,21 +40,26 @@ const PagPeriodo = (props) => {
 	const [hiddenDownYear, setHiddenDownYear] = useState(true)
 
 	const [mesDinamico, setMesDinamico] = useState('Diciembre')
+	const [yearDinamico, setYearDinamico] = useState(countJahr)
 
-	// ------------------------------------------------------------------------------------------
-	// const [lastMes, setLastMes] = useState( () => { Msg_GetLasDates().then(res => { setLastMes(res.lastMes) }) } ) 
-	// const [lastYear, setLastYear] = useState( () => { Msg_GetLasDates().then(res => { setLastYear(res.lastYear) }) } ) 
-	// const prevLastMes = lastMes
-	// const prevLastYear = lastYear 
-	// ------------------------------------------------------------------------------------------
 
-	// para acceder a las variables recuerda ocupar state.temporalidad	
 	const [state, setState] = useContext(MyContext);
 
 	const increaseMeses = () =>{
 		setHiddenDown(false)
-		countMeses >= meses.length - 1 ? setCountMeses(meses.length - 1) : setCountMeses(countMeses + 1)
-		countMeses >= meses.length - 2 ? setHiddenUp(true) : setHiddenUp(false)
+		var jahrActual = state.lastYear 
+		// Obtenemos el index donde se encuentra nuestro lasMonth
+		var getIndex = meses.findIndex(res => res === state.lastMonth)
+		// Este dos lo pongo para que reaccione rapido y mande al carajo
+		// la flecha de arriba
+		if (countJahr >= jahrActual && countMeses >= getIndex - 2){ 
+			setCountMeses(getIndex - 1)
+			setHiddenUp(true) 
+		}else{
+
+			countMeses >= meses.length - 1 ? setCountMeses(meses.length - 1) : setCountMeses(countMeses + 1)
+			countMeses >= meses.length - 2 ? setHiddenUp(true) : setHiddenUp(false)
+		}
 		countMeses + 1 > meses.length - 2 ? setMesReset(false) : setMesReset(true)
 	}
 
@@ -85,7 +86,27 @@ const PagPeriodo = (props) => {
 	}
 	
 	useEffect(() => {    
-		state.temporalidad == 'year' ? setToGetData(true) : setToGetData(false)
+		state.temporalidad == 'year' ? setToGetData(true) : setToGetData(false)	
+		var jahrActual = state.lastYear 
+		var getIndex = meses.findIndex(res => res === state.lastMonth)
+		// BUG
+		// Posible bug que puede ser generado en los meses de Diciembre ya que al llegar
+		// a ese punto podria aparecer la fecha cuando cambiemos el year
+		if (countJahr != jahrActual && countMeses == getIndex - 1){
+			setHiddenUp(false)
+		}else if (countJahr == jahrActual && countMeses > getIndex - 1){
+			setCountMeses(getIndex - 1)
+			setMesReset(true)
+			setHiddenUp(true)
+		}
+		if (!mesRestart){
+			console.log('Restart')
+			setYearDinamico(countJahr + 1)
+		}else{
+			setYearDinamico(countJahr)
+		}
+
+
 	});
 
 	return (
@@ -108,9 +129,10 @@ const PagPeriodo = (props) => {
 				}
 					</div>
 					<div className="cambio-automatico-Year">
+					
 						{modeToGetData
 								? <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr } />
-								: <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr } />
+								: <SetPeriodo className='year' setPeriodo={'Ano'} years={ yearDinamico } />
 						}
 							</div>
 							<div className='btn-Calcular pagPeriodo'>

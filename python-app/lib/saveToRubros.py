@@ -41,7 +41,7 @@ def get_Rubros(path, fixeData=2):
             try:
                 if i > Posicion[x] and i < Posicion[x+1]:
                     producto.append(df.index[i-fixeData]) 
-                    valores.append(df.iloc[i-fixeData].values)        
+                    valores.append(df.iloc[i-(fixeData)].values)        
                     data.update({
                         NameRubros[x]: {
                             'columnas': df.columns,  
@@ -65,7 +65,7 @@ def get_Rubros(path, fixeData=2):
     return NameRubros, data 
 
 
-def saveRubros(NameRubros, data):
+def saveRubros(NameRubros, data, _type_):
     ''' 
     Aqui almacenamos la data en csv
 
@@ -81,34 +81,36 @@ def saveRubros(NameRubros, data):
                                   columns=data[NameRubros[i]]['columnas'], 
                                   index=data[NameRubros[i]]['producto'])
             
-            rubros.to_csv(config.PATH_SAVE_RUBROS + 'rubro' + str(int(i)+1) + '.csv')
+            rubros.to_csv(config.PATH_SAVE_RUBROS + _type_ + '/' + 'rubro' + str(int(i)+1) + '.csv')
         except TypeError as r: 
             print({'error': 'EN RUBROS AL GUARDAR DOCUMENTOS'})
 
 
-def saveFixeData():
+def saveFixeData(_type_):
     # En esta definicion arreglamos los datos de fecha y mes con la ayuda
     # del modulo fixeDataRubros.py
-    for path in Path(config.PATH_SAVE_RUBROS).rglob('*.csv'):
-        openRubros = pd.read_csv(config.PATH_SAVE_RUBROS + path.name, index_col = 0)
+    for path in Path(config.PATH_SAVE_RUBROS + _type_).rglob('*.csv'):
+        openRubros = pd.read_csv(config.PATH_SAVE_RUBROS + _type_ + '/' + path.name, index_col = 0)
         dataFixed = fixeDataRubros.run(openRubros)
-        dataFixed.to_csv(config.PATH_SAVE_RUBROS + path.name)
-    return {'res': 'Se arreglo la data de rubro[1-12].csv'}
+        dataFixed.to_csv(config.PATH_SAVE_RUBROS + _type_ + '/' + path.name)
+    return {'res': 'Se arreglo la data de rubro[1-12].csv: {}'.format(_type_)}
 
 
-def run(path):
+def run(path, _type_):
     '''
     [Args]
         [path : str] : [path de nuestro CSV Base_INPC_1969_2021]
+        [_type_: str] : [seteamos si queremos hacer un update 
+                        de los datos mensual y anual]
     '''
     try:
         x, y = get_Rubros(path)
         # ----------------------------------
         # ----------------------------------
-        saveRubros(x,y)
+        saveRubros(x, y, _type_)
         # ----------------------------------
         # ----------------------------------
-        saveFixeData()
+        saveFixeData(_type_)
         # ----------------------------------
         return {'res': 'Todo bien al salvar y arreglar los documentos'}
     except TypeError:

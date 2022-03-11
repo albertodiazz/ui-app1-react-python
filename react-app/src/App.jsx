@@ -6,7 +6,8 @@ import { MyContextProvider } from "./components/context";
 
 
 function App() {
-	// SetTemporalidad
+	// TODO
+	// [] Armar pag de rubros
 	return (
 		<BrowserRouter>
 			<MyContextProvider>

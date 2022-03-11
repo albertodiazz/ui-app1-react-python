@@ -27,9 +27,6 @@ api_call.add_argument('temporalidad', type=str)
 class rangosDeFechas(Resource):
     def post(self):
         args = api_call.parse_args()
-        # TODO 
-        # [] Terminar con los datos y consumirlos aun no tengo el documento actual con las 3 columna que agregaran
-        #    pero puedo avanzar con el tema de los json
         # ------------------------------------------------------
         try:
             if args['mes'] is not None and args['year'] is not None:
@@ -67,11 +64,13 @@ class getData(Resource):
     def post(self):
         args = api_call.parse_args()
         print('getData: {}'.format(args['getLastDates']))
-        # TODO 
-        # [] Recuerda en poner el args en getLastMonthYear como argumento pero primero debes
-        #    hacer la modificacion para que los rubros se guarden com rubro1_mensual o rubro1_anual
+        # TODO : [Hay que hacerlo cuando nos llegue la base de datos actualizada o 
+        #         estemos en esa parte] 
+        # [] Consumir el INPC
+        # [] Pensar en que me van agreagar una columna mas entre 1 3
+        # [] Tener claridad en todo y como se deben consumir los datos
         # ------------------------------------------------------
-        data = getLastMonthYear.run() if args['getLastDates'] is not None else '400' 
+        data = getLastMonthYear.run(args['getLastDates']) if args['getLastDates'] is not None else '400' 
         # ------------------------------------------------------
         print(data)
         return jsonify(data) 

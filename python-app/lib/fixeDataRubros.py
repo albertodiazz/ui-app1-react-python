@@ -42,14 +42,14 @@ def correcion_meses(msg):
     # jahr = '19'+msg[1]
     # jahr = re.sub('18|19|20|21|22|23|24|25','',msg[1])
     jahr = msg[1]
-
+    slc = slice(0,3)
     def translate(match):
             word = match.group(0)
             if word in correciones:
                 return correciones[word]
             return word
     date = [
-        re.sub(r'\w+', translate, mes),
+        re.sub(r'\w+', translate, mes[slc].lower()),
         jahr
     ]
     return "-".join(date)
