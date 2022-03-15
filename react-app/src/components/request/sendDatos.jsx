@@ -70,4 +70,48 @@ export async function Msg_MensualAnual(_temporalidad_){
 	return res
 
 }
+export async function Msg_Rubros(_msg_){
+	var msg = {
+		'nameRubros': _msg_ 
+	}
+
+	const responnse = await fetch('http://localhost:5000/busqueda', {  // Enter your IP address here
+		method: 'POST', 
+		headers: {
+			'Host': 'localhost:5000',
+			'Origin': 'localhost:3000',
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		},
+		mode: 'cors', 
+		body: JSON.stringify(msg) // body data type must match "Content-Type" header
+	})
+
+	const res = await responnse.json()
+	console.log(res)
+	return res
+
+}
+export async function Msg_Momentos(_msg_){
+	var msg = {
+		'momentosEspeciales': _msg_ 
+	}
+
+	const responnse = await fetch('http://localhost:5000/momentos', {  // Enter your IP address here
+		method: 'POST', 
+		headers: {
+			'Host': 'localhost:5000',
+			'Origin': 'localhost:3000',
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		},
+		mode: 'cors', 
+		body: JSON.stringify(msg) // body data type must match "Content-Type" header
+	})
+
+	const res = await responnse.json()
+	console.log(res)
+	return res
+
+}
 

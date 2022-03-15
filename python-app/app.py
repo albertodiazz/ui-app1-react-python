@@ -19,9 +19,10 @@ path = '/mnt/d/trabajo/cocay/ramodelacion_Mide/2_4_mide_inflacion/python-app/dat
 
 api_call.add_argument('mes', type=str)
 api_call.add_argument('year', type=str)
-api_call.add_argument('nameRubro', type=str)
+api_call.add_argument('nameRubros', type=str)
 api_call.add_argument('getLastDates', type=str)
 api_call.add_argument('temporalidad', type=str)
+api_call.add_argument('momentosEspeciales', type=str)
 
 
 class rangosDeFechas(Resource):
@@ -37,10 +38,6 @@ class rangosDeFechas(Resource):
                 # data = buscadorDeRangos.search(args['nameRubro'], jahr=int(args['year']), mes=args['mes']) 
                 return {'statusCode': '200',
                         'body': json.dumps('El msg se salvo de forma correcta')} 
-            else:
-                # Quiere decir que solo nos mando el year y estamos en modo anual
-                data = buscadorDeRangos.search(args['nameRubro'], jahr=int(args['year']))
-                return data
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -55,6 +52,32 @@ class setMensualAnual(Resource):
                 setJson.run(config.PATH_JSON, Temporalidad=args['temporalidad'])
                 return {'statusCode' : '200',
                         'body': json.dumps('Mensaje temporalidad salvado')}
+        except TypeError as error:
+            return {'statusCode': '400',
+                    'body': json.dumps(error)}
+
+
+class setBusqueda(Resource):
+    def post(self):
+        args = api_call.parse_args()
+        try:
+            if args['nameRubros'] is not None:
+                setJson.run(config.PATH_JSON, Buscador=args['nameRubros'])
+                return {'statusCode' : '200',
+                        'body': json.dumps('Mensaje busqueda salvado')}
+        except TypeError as error:
+            return {'statusCode': '400',
+                    'body': json.dumps(error)}
+
+
+class setMomentos(Resource):
+    def post(self):
+        args = api_call.parse_args()
+        try:
+            if args['momentosEspeciales'] is not None:
+                setJson.run(config.PATH_JSON, Especial=args['momentosEspeciales'])
+                return {'statusCode' : '200',
+                        'body': json.dumps('Mensaje momentos salvado')}
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -77,9 +100,11 @@ class getData(Resource):
 
 
 # ---------------------------------------------
-api.add_resource(rangosDeFechas,'/fechas')
-api.add_resource(getData,'/get_last')
-api.add_resource(setMensualAnual,'/mensualAnual')
+api.add_resource(rangosDeFechas, '/fechas')
+api.add_resource(getData, '/get_last')
+api.add_resource(setMensualAnual, '/mensualAnual')
+api.add_resource(setBusqueda, '/busqueda')
+api.add_resource(setMomentos, '/momentos')
 # --------------------------------------------
 
 
