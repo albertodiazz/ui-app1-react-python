@@ -7,6 +7,7 @@ import PagRubros from "./components/paginas/pagRubros"
 import PagHome from "./components/paginas/pagHome"
 import PagIntro from "./components/paginas/pagIntro"
 import PagStandBy from "./components/paginas/pagStandBy"
+import PagFinal from "./components/paginas/pagFinal"
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 						<Route path="pagStandby" element={<PagStandBy/>} />
 						<Route path="pagIntro" element={<PagIntro/>} />
 						<Route path="pagHome" element={<PagHome/>} />
+						<Route path="pagFinal" element={<PagFinal/>} />
 					</Routes>
 				</div>
 			</MyContextProvider>

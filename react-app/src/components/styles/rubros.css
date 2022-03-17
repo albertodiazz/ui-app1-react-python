@@ -1,0 +1,230 @@
+.rubros {
+	background-image: url('../../assets/06_Rubros_Fondo.png');
+	position: absolute;
+	width: 100%; height: 100%;
+	left: 0px; top: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* flex-direction: column; */
+}
+.botonContinuar {
+	width: 325px; height: 65px;
+	position: absolute;
+	margin-bottom: -20%;
+
+}
+.btnRubros{
+	position: absolute;
+	display: grid;
+	/* justify-content: space-between ; */
+	/* align-items: center; */
+	grid-template-columns: repeat(6, 1fr);
+	gap: 30px;
+	border: 2px solid green;
+	top: 150px;
+}
+.btnDinamico{
+	position: absolute;
+	display: flex;
+	justify-content: space-between ;
+	align-items: center;
+	border: 2px solid green;
+	width: 1000px; height: 65px;
+	bottom: 100px;
+}
+.btnRubro1{
+	background-image: url('../../assets/06_Rubros_botones/Rubro1.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro1Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro1_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro2{
+	background-image: url('../../assets/06_Rubros_botones/Rubro2.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro2Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro2_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro3{
+	background-image: url('../../assets/06_Rubros_botones/Rubro3.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro3Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro3_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro4{
+	background-image: url('../../assets/06_Rubros_botones/Rubro4.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro4Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro4_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro5{
+	background-image: url('../../assets/06_Rubros_botones/Rubro5.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro5Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro5_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro6{
+	background-image: url('../../assets/06_Rubros_botones/Rubro6.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro6Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro6_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro7{
+	background-image: url('../../assets/06_Rubros_botones/Rubro7.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro7Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro7_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro8{
+	background-image: url('../../assets/06_Rubros_botones/Rubro8.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro8Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro8_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro9{
+	background-image: url('../../assets/06_Rubros_botones/Rubro9.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro9Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro9_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro10{
+	background-image: url('../../assets/06_Rubros_botones/Rubro10.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro10Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro10_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro11{
+	background-image: url('../../assets/06_Rubros_botones/Rubro11.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro11Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro11_activo.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro12{
+	background-image: url('../../assets/06_Rubros_botones/Rubro12.png');
+	width: 171px; height: 189px;
+
+}
+.btnRubro12Activo{
+	background-image: url('../../assets/06_Rubros_botones/Rubro12_activo.png');
+	width: 171px; height: 189px;
+
+}
+.salir{
+	background-image: url('../../assets/Botones/06_Boton_Salir.png');
+	width: 161px; height: 51px;
+
+}
+.salirActivo{
+	background-image: url('../../assets/Botones/06_Boton_Salir_pressed.png');
+	width: 161px; height: 51px;
+
+}
+.btnperiodo{
+	background-image: url('../../assets/Botones/06_Boton_OtroPeriodo.png');
+	width: 261px; height: 51px;
+
+}
+.btnperiodoActivo{
+	background-image: url('../../assets/Botones/06_Boton_OtroPeriodo_pressed.png');
+	width: 261px; height: 51px;
+}
+.subyacente{
+	background-image: url('../../assets/Botones/06_Boton_InflacionSubyacente.png');
+	width: 261px; height: 51px;
+
+}
+.subyacenteActivo{
+	background-image: url('../../assets/Botones/06_Boton_InflacionSubyacente_pressed.png');
+	width: 261px; height: 51px;
+
+}
+.video1 {
+	width: 80%;
+	margin-bottom: 10%;
+}
+.imagePop{
+	width: 1231px; height: 641px;
+	margin-bottom: 50%;
+}
+.PopUp {
+	position: absolute;
+	backdrop-filter: blur(20px);
+	width: 100%; height: 100%;
+	left: 0px; top: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* flex-direction: column; */
+}
+.btnClose{
+	background-image: url('../../assets/Botones/07_Boton_Cerrar.png');
+	width: 51px; height: 51px;
+	position: absolute;
+	margin-left: 110%;
+	margin-bottom: 105%;
+}
+.btnCloseActivo{
+	background-image: url('../../assets/Botones/07_Boton_Cerrar_pressed.png');
+	width: 51px; height: 51px;
+	position: absolute;
+	margin-left: 110%;
+	margin-bottom: 105%;
+}
+.btnHome{
+	background-image: url('../../assets/Botones/06_Boton_HOME.png');
+	width: 43px; height: 46px;
+	position: absolute;
+	margin-top: 50%;
+}
+.btnHomeActivo{
+	background-image: url('../../assets/Botones/06_Boton_HOME_pressed.png');
+	width: 43px; height: 46px;
+	position: absolute;
+	margin-top: 50%;
+	/* margin-left: 110%; */
+	/* margin-bottom: 105%; */
+}

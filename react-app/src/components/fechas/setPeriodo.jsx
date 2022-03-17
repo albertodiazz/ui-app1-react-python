@@ -9,7 +9,7 @@ export default function SetPeriodo(props) {
 	// [x] Necesito comunicacion con python
 
 	return (
-		<div className="flex-col-hstart-vstart">
+		<div>
 			{!props.mode && <strong>{ props.setPeriodo == 'Mes' ? props.meses : props.years }</strong>}
 			{props.mode && <strong>{ props.lastMes }</strong>}
 		</div>

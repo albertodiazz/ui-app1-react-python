@@ -90,7 +90,11 @@ class getData(Resource):
         # TODO : [Hay que hacerlo cuando nos llegue la base de datos actualizada o 
         #         estemos en esa parte] 
         # [] Consumir el INPC
-        # [] Pensar en que me van agreagar una columna mas entre 1 3
+        # [] Consumir los datos subyacentes
+        # [] Consumir los totales de subyacente y no subyacente en linea 316
+        # [] Consumir los datos de los rubros ya que tambien tienen no solo hay que consumir
+        #    el de los productos
+        # [x] Pensar en que me van agreagar una columna mas entre 1 3
         # [] Tener claridad en todo y como se deben consumir los datos
         # ------------------------------------------------------
         data = getLastMonthYear.run(args['getLastDates']) if args['getLastDates'] is not None else '400' 

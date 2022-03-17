@@ -1,0 +1,66 @@
+.periodo {
+
+	background-image: url('../../assets/05_Periodo.png');
+	background-position: center;
+	background-color: center;
+	position: absolute;
+	width: 100%; height: 100%;
+	left: 0px; top: 0px;
+	display: flex;
+	justify-content: center;
+	background-repeat: no-repeat;
+	align-items: center;
+}
+.boton-Mes{
+	width: 325px; height: 65px;
+	left: 450px; top: 200px;
+	margin-top: 15%;
+}
+.boton-Year{
+	width: 325px; height: 65px;
+	left: 585px; top: 200px;
+	margin-top: 15%;
+}
+.cambio-automatico-Mes{
+	width: 325px; height: 65px;
+	left: 775px; top: 225px;
+	margin-top: 15%;
+}
+.cambio-automatico-Year{
+	width: 325px; height: 65px;
+	left: 915px; top: 225px;
+	margin-top: 15%;
+}
+.arrow {
+	border: solid black;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+
+}
+
+.up {
+	transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+
+}
+
+.down {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+
+}
+.calcularNormal {
+	width: 193px; height: 61px;
+	background-image: url('../../assets/Botones/05_Calcular.png');
+	background-repeat: no-repeat;
+	margin-top: 25%;
+
+}
+.calcularActivo {
+	width: 193px; height: 61px;
+	background-image: url('../../assets/Botones/05_Calcular_Activo.png');
+	background-repeat: no-repeat;
+	margin-top: 25%;
+
+}

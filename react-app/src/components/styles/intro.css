@@ -1,0 +1,25 @@
+.intro {
+
+	background-image: url('../../assets/02_Intro.png');
+	background-position: center;
+	position: absolute;
+	width: 100%; height: 100%;
+	left: 0px; top: 0px;
+	display: flex;
+	justify-content: center;
+	background-repeat: no-repeat;
+	align-items: center;
+}
+.botonContinuar {
+	width: 325px; height: 65px;
+	margin-top: 15%;
+
+}
+.normal {
+	background-image: url('../../assets/Botones/02_Btn_Toca.png');
+
+}
+.activo{
+	background-image: url('../../assets/Botones/02_Btn_Toca_activo.png');
+
+}

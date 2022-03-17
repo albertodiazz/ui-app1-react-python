@@ -1,0 +1,33 @@
+.final{
+
+	background-image: url('../../assets/08_Final.png');
+	position: absolute;
+	width: 100%; height: 100%;
+	left: 0px; top: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* flex-direction: column; */
+}
+.btnPeriodo {
+	background-image: url('../../assets/Botones/08_OtroPeriodo.png');
+	width: 261px; height: 51px;
+	margin-top: 40%;
+	margin-right: 5%;
+}
+.btnPeriodoActivo {
+	background-image: url('../../assets/Botones/08_OtroPeriodo_pressed.png');
+	width: 261px; height: 51px;
+	margin-top: 40%;
+	margin-right: 5%;
+}
+.btnAbandonar{
+	background-image: url('../../assets/Botones/08_Abandonar.png');
+	width: 261px; height: 51px;
+	margin-top: 40%;
+}
+.btnAbandonarActivo {
+	background-image: url('../../assets/Botones/08_Abandonar_pressed.png');
+	width: 261px; height: 51px;
+	margin-top: 40%;
+}

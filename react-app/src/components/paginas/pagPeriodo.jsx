@@ -5,6 +5,7 @@ import SetTemporalidad from  '../fechas/setTemporalidad'
 import BtnCalcular from  '../fechas/btnCalcular'
 import { MyContext  } from "../context";
 import { Msg_GetLasDates } from "../request/sendDatos" 
+import '../styles/periodo.css'
 
 
 const PagPeriodo = (props) => {
@@ -44,6 +45,7 @@ const PagPeriodo = (props) => {
 
 
 	const [state, setState] = useContext(MyContext);
+	// const [btnCalcular, setBtnCalcular] = useState(true);
 
 	const increaseMeses = () =>{
 		setHiddenDown(false)
@@ -85,6 +87,7 @@ const PagPeriodo = (props) => {
 		countJahr <= _inicio_ + 1 ? setHiddenDownYear(true) : setHiddenDownYear(false)
 	}
 	
+	
 	useEffect(() => {    
 		state.temporalidad == 'year' ? setToGetData(true) : setToGetData(false)	
 		var jahrActual = state.lastYear 
@@ -108,18 +111,20 @@ const PagPeriodo = (props) => {
 
 
 	});
+	// BUG
+	// [] Al momento de llegar al ultimo year en temporalidad mensual las flechas mensuales se comportan raro
 
 	return (
-		<div className="Temporalidades">
+		<div className="Temporalidades periodo">
 			<div className="boton-Mes" >
-				{ (!hiddenUp && state.temporalidad == 'mes') && <button onClick={ increaseMeses } className="arrow up"> </button> } 
+				{ (state.temporalidad == 'mes') && <button onClick={ increaseMeses } className="arrow up" style={{opacity: !hiddenUp?1:0}}> </button> } 
 				<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
-				{ !hiddenDown && <button onClick= { decreaseMeses } className="arrow down"></button> } 
+				{ <button onClick= { decreaseMeses } className="arrow down" style={{opacity: !hiddenDown?1:0}}></button> } 
 			</div>
 			<div className="boton-Year">
-				{ !hiddenUpYear && <button onClick={ increaseYear } className="arrow up"> </button> } 
+				{ <button onClick={ increaseYear } className="arrow up" style={{opacity: !hiddenUpYear?1:0}}> </button> } 
 				<SetPeriodo className='year' years={ countJahr } />
-				{ !hiddenDownYear && <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down"></button> } 
+				{ <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down" style={{opacity: !hiddenDownYear?1:0}}></button> } 
 			</div>
 
 			<div className="cambio-automatico-Mes" >
@@ -129,15 +134,13 @@ const PagPeriodo = (props) => {
 				}
 					</div>
 					<div className="cambio-automatico-Year">
-					
+
 						{modeToGetData
 								? <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr } />
 								: <SetPeriodo className='year' setPeriodo={'Ano'} years={ yearDinamico } />
 						}
 							</div>
-							<div className='btn-Calcular pagPeriodo'>
 								<BtnCalcular mes={ meses[countMeses] } year={ countJahr } />
-						</div>
 
 						</div>
 

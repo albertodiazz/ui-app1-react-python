@@ -1,0 +1,29 @@
+.home {
+
+	background-image: url('../../assets/03_Home.png');
+	position: absolute;
+	width: 100%; height: 100%;
+	left: 0px; top: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* flex-direction: column; */
+}
+.botonContinuar {
+	width: 325px; height: 65px;
+	position: absolute;
+	margin-bottom: -20%;
+
+}
+.normal {
+	background-image: url('../../assets/Botones/03_Btn_Toca.png');
+
+}
+.activo{
+	background-image: url('../../assets/Botones/03_Btn_Toca_activo.png');
+
+}
+.video1 {
+	width: 80%;
+	margin-bottom: 10%;
+}

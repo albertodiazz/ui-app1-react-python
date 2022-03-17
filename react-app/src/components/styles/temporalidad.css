@@ -1,0 +1,52 @@
+.temporalidad{
+
+	background-image: url('../../assets/04_Temporalidad.png');
+	position: absolute;
+	width: 100%; height: 100%;
+	left: 0px; top: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-repeat: no-repeat;
+	/* flex-direction: column; */
+}
+.botonContinuarMensual {
+	width: 325px; height: 65px;
+	left: 425px; top: 425px;
+	position: absolute;
+	margin-bottom: -20%;
+
+}
+.botonContinuarAnual{
+	width: 325px; height: 65px;
+	left: 800px; top: 425px;
+	position: absolute;
+	margin-bottom: -20%;
+
+}
+.normal1 {
+	background-image: url('../../assets/Botones/04_Deseleccionado.png');
+	background-repeat: no-repeat;
+
+}
+.activo1 {
+	background-image: url('../../assets/Botones/04_Seleccionado.png');
+	background-repeat: no-repeat;
+
+
+}
+.normalAnual {
+	background-image: url('../../assets/Botones/04_Deseleccionado.png');
+	background-repeat: no-repeat;
+
+}
+.activoAnual {
+	background-image: url('../../assets/Botones/04_Seleccionado.png');
+	background-repeat: no-repeat;
+
+
+}
+.video1 {
+	width: 80%;
+	margin-bottom: 10%;
+}

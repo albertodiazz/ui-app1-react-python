@@ -4,7 +4,7 @@ from lib import fixeDataRubros
 from pathlib import Path
 
 
-def get_Rubros(path, fixeData=2):
+def get_Rubros(path, fixeData=3):
     '''
     Funcion en donde depuramos los datos del documento base
 
@@ -20,49 +20,57 @@ def get_Rubros(path, fixeData=2):
                         columnas(son los meses), producto(nombre), valores]
 
     '''
-    df = pd.read_csv(path, index_col=0)
+    # TODO
+    # [] Hay que revizar que todo corra bien junto con react ya que no se si le este contestando bien
+    # [] Los datos del rubro12 tienen datos de mas que son los nuevos hay que quitar eso
+    df = pd.read_csv(path, index_col=0, usecols=lambda c: not c.startswith('Unnamed:'))
     
     NameRubros, Posicion = [], [] 
     data = {}
-
-    for i in range(len(df)):
-        # El siguiente 2 no tiene nada que ver con el fixeData
+    try:
+        for i in range(len(df)):
+            # El siguiente 2 no tiene nada que ver con el fixeData
         # lo ocupamos para separar los rumbros de los servicios
         # ya que en la tabla los tenemos con 00 dos digitos
-        if len(df.index.str.split()[i][0]) == 2:
-            NameRubros.append(df.index[i])
-            Posicion.append(i + fixeData)
+            try: 
+                if len(df.index.str.split()[i][0]) == 2:
+                    NameRubros.append(df.index[i])
+                    Posicion.append(i + fixeData)
+                    print(NameRubros)
+            except TypeError: 
+                pass
 
-    producto, valores = [], []
-    for x in range(len(Posicion)):
-        print('<<<<<<<<<<<<<<<<{0}>>>>>>>>>>>>'.format(NameRubros[x]))
         producto, valores = [], []
-        for i in range(len(df) + fixeData):
-            try:
-                if i > Posicion[x] and i < Posicion[x+1]:
+        for x in range(len(Posicion)):
+            print('<<<<<<<<<<<<<<<<{0}>>>>>>>>>>>>'.format(NameRubros[x]))
+            producto, valores = [], []
+            for i in range(len(df) + fixeData):
+                try:
+                    if i > Posicion[x] and i < Posicion[x+1]:
+                        producto.append(df.index[i-fixeData]) 
+                        valores.append(df.iloc[i-(fixeData)].values)        
+                        data.update({
+                            NameRubros[x]: {
+                                'columnas': df.columns,  
+                                'producto': producto,
+                                'valores': valores
+                            }
+                        })
+                except IndexError:
+                    # Aqui obtengo los ultimos valores
                     producto.append(df.index[i-fixeData]) 
-                    valores.append(df.iloc[i-(fixeData)].values)        
+                    valores.append(df.iloc[i-fixeData].values) 
                     data.update({
                         NameRubros[x]: {
-                            'columnas': df.columns,  
+                            'columnas': df.columns,
                             'producto': producto,
                             'valores': valores
                         }
                     })
-            except IndexError:
-                # Aqui obtengo los ultimos valores
-                producto.append(df.index[i-fixeData]) 
-                valores.append(df.iloc[i-fixeData].values) 
-                data.update({
-                    NameRubros[x]: {
-                        'columnas': df.columns,
-                        'producto': producto,
-                        'valores': valores
-                    }
-                })
-                pass
-    
-    return NameRubros, data 
+                    pass
+        return NameRubros, data 
+    except TypeError as error:
+        print(error)
 
 
 def saveRubros(NameRubros, data, _type_):
@@ -80,7 +88,7 @@ def saveRubros(NameRubros, data, _type_):
             rubros = pd.DataFrame(data[NameRubros[i]]['valores'], 
                                   columns=data[NameRubros[i]]['columnas'], 
                                   index=data[NameRubros[i]]['producto'])
-            
+
             rubros.to_csv(config.PATH_SAVE_RUBROS + _type_ + '/' + 'rubro' + str(int(i)+1) + '.csv')
         except TypeError as r: 
             print({'error': 'EN RUBROS AL GUARDAR DOCUMENTOS'})
@@ -110,8 +118,9 @@ def run(path, _type_):
         saveRubros(x, y, _type_)
         # ----------------------------------
         # ----------------------------------
+        # ----------------------------------
         saveFixeData(_type_)
         # ----------------------------------
         return {'res': 'Todo bien al salvar y arreglar los documentos'}
-    except TypeError:
-        return {'res':'recuerda poner el path de config.INPC_mensual or INPC_anual'}
+    except TypeError as error:
+        return {'res': error }
