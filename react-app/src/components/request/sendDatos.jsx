@@ -115,3 +115,49 @@ export async function Msg_Momentos(_msg_){
 
 }
 
+export async function Msg_Niveles(_msg_){
+	var msg = {
+		'nivel': _msg_ 
+	}
+
+	const responnse = await fetch('http://localhost:5000/niveles', {  // Enter your IP address here
+		method: 'POST', 
+		headers: {
+			'Host': 'localhost:5000',
+			'Origin': 'localhost:3000',
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		},
+		mode: 'cors', 
+		body: JSON.stringify(msg) // body data type must match "Content-Type" header
+	})
+
+	const res = await responnse.json()
+	console.log(res)
+	return res
+
+}
+
+export async function Msg_Subyacente(_msg_){
+	var msg = {
+		'subyacente': _msg_ 
+	}
+
+	const responnse = await fetch('http://localhost:5000/subyacentes', {  // Enter your IP address here
+		method: 'POST', 
+		headers: {
+			'Host': 'localhost:5000',
+			'Origin': 'localhost:3000',
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		},
+		mode: 'cors', 
+		body: JSON.stringify(msg) // body data type must match "Content-Type" header
+	})
+
+	const res = await responnse.json()
+	console.log(res)
+	return res
+
+}
+

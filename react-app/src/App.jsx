@@ -11,8 +11,6 @@ import PagFinal from "./components/paginas/pagFinal"
 
 
 function App() {
-	// TODO
-	// [] Armar pag de rubros
 	return (
 		<BrowserRouter>
 			<MyContextProvider>

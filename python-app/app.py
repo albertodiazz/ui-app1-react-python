@@ -23,6 +23,8 @@ api_call.add_argument('nameRubros', type=str)
 api_call.add_argument('getLastDates', type=str)
 api_call.add_argument('temporalidad', type=str)
 api_call.add_argument('momentosEspeciales', type=str)
+api_call.add_argument('nivel', type=str)
+api_call.add_argument('subyacente', type=str)
 
 
 class rangosDeFechas(Resource):
@@ -83,19 +85,44 @@ class setMomentos(Resource):
                     'body': json.dumps(error)}
 
 
+class setNiveles(Resource):
+    def post(self):
+        args = api_call.parse_args()
+        try:
+            if args['nivel'] is not None:
+                setJson.run(config.PATH_JSON, Nivel=args['nivel'])
+                return {'statusCode' : '200',
+                        'body': json.dumps('Mensaje momentos salvado')}
+        except TypeError as error:
+            return {'statusCode': '400',
+                    'body': json.dumps(error)}
+
+
+class setSubyacentes(Resource):
+    def post(self):
+        args = api_call.parse_args()
+        try:
+            if args['subyacente'] is not None:
+                setJson.run(config.PATH_JSON, Subyacentes=args['subyacente'])
+                return {'statusCode' : '200',
+                        'body': json.dumps('Mensaje momentos salvado')}
+        except TypeError as error:
+            return {'statusCode': '400',
+                    'body': json.dumps(error)}
+
+
 class getData(Resource):
     def post(self):
         args = api_call.parse_args()
         print('getData: {}'.format(args['getLastDates']))
         # TODO : [Hay que hacerlo cuando nos llegue la base de datos actualizada o 
         #         estemos en esa parte] 
-        # [] Consumir el INPC
-        # [] Consumir los datos subyacentes
-        # [] Consumir los totales de subyacente y no subyacente en linea 316
+        # [x] Consumir el INPC
+        # [x] Consumir los datos subyacentes
+        # [x] Consumir los totales de subyacente y no subyacente en linea 316
         # [] Consumir los datos de los rubros ya que tambien tienen no solo hay que consumir
         #    el de los productos
         # [x] Pensar en que me van agreagar una columna mas entre 1 3
-        # [] Tener claridad en todo y como se deben consumir los datos
         # ------------------------------------------------------
         data = getLastMonthYear.run(args['getLastDates']) if args['getLastDates'] is not None else '400' 
         # ------------------------------------------------------
@@ -109,6 +136,8 @@ api.add_resource(getData, '/get_last')
 api.add_resource(setMensualAnual, '/mensualAnual')
 api.add_resource(setBusqueda, '/busqueda')
 api.add_resource(setMomentos, '/momentos')
+api.add_resource(setNiveles, '/niveles')
+api.add_resource(setSubyacentes, '/subyacentes')
 # --------------------------------------------
 
 

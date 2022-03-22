@@ -1,5 +1,6 @@
 .rubros {
 	background-image: url('../../assets/06_Rubros_Fondo.png');
+	background-color: #DE726C;
 	position: absolute;
 	width: 100%; height: 100%;
 	left: 0px; top: 0px;
@@ -182,17 +183,67 @@
 	width: 261px; height: 51px;
 
 }
+.btnSubyacentes {
+	position: absolute;
+	width: 500px; height: 150px;
+	left: 700px; top: 530px;
+	border: 10px dotted green;	
+        display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 30px;
+}
+.btnSub1{
+	background-image: url('../../assets/Botones/07_Boton_Seccion1.png');
+	width: 151px; height: 51px;
+
+}
+.btnSub1Activo{
+	background-image: url('../../assets/Botones/07_Boton_Seccion1_activo.png');
+	width: 151px; height: 51px;
+
+}
+.btnSub2{
+	background-image: url('../../assets/Botones/07_Boton_Seccion2.png');
+	width: 151px; height: 51px;
+
+}
+.btnSub2Activo{
+	background-image: url('../../assets/Botones/07_Boton_Seccion2_activo.png');
+	width: 151px; height: 51px;
+
+}
+.btnSub3{
+	background-image: url('../../assets/Botones/07_Boton_Seccion3.png');
+	width: 151px; height: 51px;
+
+}
+.btnSub3Activo{
+	background-image: url('../../assets/Botones/07_Boton_Seccion3_activo.png');
+	width: 151px; height: 51px;
+
+}
+.btnSub4{
+	background-image: url('../../assets/Botones/07_Boton_Seccion4.png');
+	width: 151px; height: 51px;
+
+}
+.btnSub4Activo{
+	background-image: url('../../assets/Botones/07_Boton_Seccion4_activo.png');
+	width: 151px; height: 51px;
+
+}
 .video1 {
 	width: 80%;
 	margin-bottom: 10%;
 }
 .imagePop{
 	width: 1231px; height: 641px;
-	margin-bottom: 50%;
+	/* margin-bottom: 50%; */
 }
 .PopUp {
-	position: absolute;
+	position: fixed;
 	backdrop-filter: blur(20px);
+	z-index: 1;
 	width: 100%; height: 100%;
 	left: 0px; top: 0px;
 	display: flex;
@@ -204,15 +255,16 @@
 	background-image: url('../../assets/Botones/07_Boton_Cerrar.png');
 	width: 51px; height: 51px;
 	position: absolute;
-	margin-left: 110%;
-	margin-bottom: 105%;
+	margin-left: 80%;
+	margin-bottom: 40%;
 }
 .btnCloseActivo{
 	background-image: url('../../assets/Botones/07_Boton_Cerrar_pressed.png');
 	width: 51px; height: 51px;
 	position: absolute;
-	margin-left: 110%;
-	margin-bottom: 105%;
+	margin-left: 50%;
+	margin-left: 80%;
+	margin-bottom: 40%;
 }
 .btnHome{
 	background-image: url('../../assets/Botones/06_Boton_HOME.png');
@@ -227,4 +279,7 @@
 	margin-top: 50%;
 	/* margin-left: 110%; */
 	/* margin-bottom: 105%; */
+}
+.rubrosArray {
+	position: relative;
 }

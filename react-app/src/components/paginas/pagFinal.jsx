@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router"
 import '../styles/final.css'
+import { Msg_Niveles } from "../request/sendDatos"
 
 
 const PagFinal = () => { 
-
+	Msg_Niveles('final') 
 	const navigate = useNavigate()
 	const [botonAbandonar, setAbandonar] = useState(true)
 	const [botonPeriodo, setPeriodo] = useState(true)

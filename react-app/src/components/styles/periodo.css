@@ -1,8 +1,8 @@
 .periodo {
 
 	background-image: url('../../assets/05_Periodo.png');
+	background-color: #DE726C;
 	background-position: center;
-	background-color: center;
 	position: absolute;
 	width: 100%; height: 100%;
 	left: 0px; top: 0px;

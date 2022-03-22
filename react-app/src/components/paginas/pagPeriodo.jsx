@@ -6,11 +6,12 @@ import BtnCalcular from  '../fechas/btnCalcular'
 import { MyContext  } from "../context";
 import { Msg_GetLasDates } from "../request/sendDatos" 
 import '../styles/periodo.css'
+import { Msg_Niveles } from "../request/sendDatos"
 
 
 const PagPeriodo = (props) => {
 	// [x] Logica de mensual, al llegar el year actual necesitamos poner un seguro en los meses
-
+	Msg_Niveles('periodo') 
 	const inicioDatos=1969;
 	const meses = [
 		'Enero', 

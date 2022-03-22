@@ -3,12 +3,11 @@ import BtnRubro from '../rubros/btnRubro'
 import BtnDinamico from '../rubros/btnDinamico' 
 import '../styles/rubros.css'
 import { useNavigate } from "react-router"
+import { Msg_Niveles } from "../request/sendDatos"
 
 
 const PagRubros = () =>{
-	// TODO
-	// [] Terminar esta parte
-
+	Msg_Niveles('rubros') 
 	const navigate = useNavigate()
 	const [styleHome, setStyleHome] = useState(true)
 	

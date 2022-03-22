@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Msg_Momentos } from '../request/sendDatos' 
+import { Msg_Momentos, Msg_Subyacente } from '../request/sendDatos' 
 import '../styles/rubros.css'
 import popUp from '../../assets/07_Pop_Up.png'
 import { useNavigate } from "react-router"
 
 
 const BtnDinamico = () =>{
-	// TODO	
-	// Es un boton que comparte diferentes modos y son los siguientes
-	// [] Explora otro periodo : nos regresemaos al nivel de Temporalidad donde seleccionamos mensual o anual 
-	// [] Inflacion actual : nos vamos al nivel final y mostramos la inflacion actual en touch y ui
-	// [] Inflacion subyacente : popup de que es la inflacion subyacente, blureamos todo el fondo
-	// [] Terminar el tema de los estilos en array
 
 	const navigate = useNavigate()
 
@@ -21,16 +15,25 @@ const BtnDinamico = () =>{
 		{text: 'Mostrar inflación subyacente', estilo: 'subyacente', estiloActivo: 'subyacenteActivo'}
 	]
  
+	const botonesSub= [
+		{estilo: 'btnSub1', estiloActivo: 'btnSub1Activo'},
+		{estilo: 'btnSub2', estiloActivo: 'btnSub2Activo'},
+		{estilo: 'btnSub3', estiloActivo: 'btnSub3Activo'},
+		{estilo: 'btnSub4', estiloActivo: 'btnSub4Activo'}
+	]
 
 	const [msg, setMsg] = useState('') 
 	const [btnStyle, setStyle] = useState('') 
+
+	const [msgSub, setMsgSub] = useState('') 
+	const [btnStyleSub, setStyleSub] = useState('') 
 
 	const [close, setClose] = useState(true)
 	const [styleClose, setStyleClose] = useState(true)
 
 	const handleBotones = (_index_) =>{	
 		_index_ == 0 ? setMsg('temporalidad')  
-		: _index_ == 2 ? setMsg('subyacente') 
+		: _index_ == 2 ? Msg_Momentos('subyacente') 
 		: setMsg(msg)
 		setStyle(botones[_index_].estilo)
 		// Aqui no le pongo un setTimeOut por que tal vez en la pantall Touch
@@ -52,18 +55,34 @@ const BtnDinamico = () =>{
 		}
 	}
 
+	const handleSub = (_index_) =>{	
+		let indexSum = parseInt(_index_) + 1
+		setMsgSub(indexSum.toString())
+		setStyleSub(botonesSub[_index_].estilo)
+	}
+
 	const closePopup = () =>{	
 		setStyleClose(false)
 		setTimeout(() =>{
 			setClose(true)
 			setStyle('')
+			setStyleSub('')
+			Msg_Momentos('') 
 		}, 200)
+		setTimeout(() =>{
+			setClose(true)
+			setStyle('')
+			setStyleSub('')
+			Msg_Subyacente('0') 
+		}, 20)
+	
 	}
 
 	useEffect(()=>{
 		// console.log(msg)
-		Msg_Momentos(msg)
-	})
+		!close ? Msg_Subyacente(msgSub) : Msg_Subyacente('0')  
+		
+	}, [msgSub, msg])
 
 	return( 
 		<div className='btnDinamico'>
@@ -74,8 +93,14 @@ const BtnDinamico = () =>{
 				{!close && <div className='PopUp' > 
 					<img className='imagePop' src={ popUp }/>
 					<div className={ styleClose? 'btnClose': 'btnCloseActivo'}  onClick={ closePopup } />
-					</div>}
+					<div className='btnSubyacentes' >
+						{botonesSub.map((boton, index) => (
+							<div className={ boton.estilo == btnStyleSub ? boton.estiloActivo : boton.estilo } key={ index } onClick={ ()=> handleSub(`${ index }`) }/>
+						) )}
+					</div>
 				</div>
+				}
+			</div>
 	)
 }
 

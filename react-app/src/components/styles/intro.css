@@ -1,6 +1,7 @@
 .intro {
 
 	background-image: url('../../assets/02_Intro.png');
+	background-color: #DE726C;
 	background-position: center;
 	position: absolute;
 	width: 100%; height: 100%;

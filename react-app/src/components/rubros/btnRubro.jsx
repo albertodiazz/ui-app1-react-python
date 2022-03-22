@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Msg_Rubros } from '../request/sendDatos' 
 import '../styles/rubros.css'
+import vr1 from '../../assets/videos/Standby.webm'
 
 
 const BtnRubro = () =>{
@@ -33,13 +34,14 @@ const BtnRubro = () =>{
 			Msg_Rubros(msg)
 		}
 	})
-	
+	// TODO
+	// [] preguntarle a misa como meteria estos videos para no tener que espera a cinthia
 
 	return( 
 
 		<div className='btnRubros'>
 			{ rubros.map((rubro, index)=>(
-				<div key={ rubro.text }> 
+				<div className='rubrosArray' key={ rubro.text }> 
 					<div className={ rubro.estilo == btnStyle ? rubro.estiloActivo : rubro.estilo } onClick={ ()=> handleBotones(`${index}`, rubro.text) } /> 
 				</div>
 

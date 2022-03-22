@@ -21,7 +21,6 @@ def get_Rubros(path, fixeData=3):
 
     '''
     # TODO
-    # [] Hay que revizar que todo corra bien junto con react ya que no se si le este contestando bien
     # [] Los datos del rubro12 tienen datos de mas que son los nuevos hay que quitar eso
     df = pd.read_csv(path, index_col=0, usecols=lambda c: not c.startswith('Unnamed:'))
     
@@ -30,16 +29,15 @@ def get_Rubros(path, fixeData=3):
     try:
         for i in range(len(df)):
             # El siguiente 2 no tiene nada que ver con el fixeData
-        # lo ocupamos para separar los rumbros de los servicios
-        # ya que en la tabla los tenemos con 00 dos digitos
+            # lo ocupamos para separar los rumbros de los servicios
+            # ya que en la tabla los tenemos con 00 dos digitos
             try: 
                 if len(df.index.str.split()[i][0]) == 2:
                     NameRubros.append(df.index[i])
                     Posicion.append(i + fixeData)
-                    print(NameRubros)
-            except TypeError: 
+                    # print(NameRubros)
+            except TypeError as r: 
                 pass
-
         producto, valores = [], []
         for x in range(len(Posicion)):
             print('<<<<<<<<<<<<<<<<{0}>>>>>>>>>>>>'.format(NameRubros[x]))
@@ -104,6 +102,26 @@ def saveFixeData(_type_):
     return {'res': 'Se arreglo la data de rubro[1-12].csv: {}'.format(_type_)}
 
 
+def saveInpc(_path_, _type_):
+    df = pd.read_csv(_path_, index_col=0, usecols=lambda c: not c.startswith('Unnamed:'))
+    # toSave = df.loc[df.index[0]]
+    toSave = df.loc[df.index == 'INPC']
+    toSave.to_csv(config.PATH_SAVE_RUBROS + _type_ + '/' + 'INPC' + '.csv')
+    print('Se salvo la data de INPC')
+    return df 
+
+
+def saveSubyacente(_path_, _type_):
+    # TODO
+    # [] Integrar la data con TouchDesigner y corroborrar que todo este bien 
+    df = pd.read_csv(_path_, index_col=0, usecols=lambda c: not c.startswith('Unnamed:'))
+    # toSave = df.loc[df.index[0]]
+    toSave = df.loc[df.index == 'Subyacente ']
+    toSave.to_csv(config.PATH_SAVE_RUBROS + _type_ + '/' + 'subyacente' + '.csv')
+    print('Se salvo la data de subyacente')
+    return df 
+
+
 def run(path, _type_):
     '''
     [Args]
@@ -116,6 +134,8 @@ def run(path, _type_):
         # ----------------------------------
         # ----------------------------------
         saveRubros(x, y, _type_)
+        saveSubyacente(path, _type_)
+        saveInpc(path, _type_)
         # ----------------------------------
         # ----------------------------------
         # ----------------------------------

@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import '../styles/intro.css'
 import standbyVideo from '../../assets/videos/Standby_Home.webm'
 import { useNavigate } from "react-router"
+import { Msg_Niveles } from "../request/sendDatos"
 
 
 const PagIntro = () => { 
 
 	const navigate = useNavigate()
 	const [boton, setBoton] = useState(true)
-
+	Msg_Niveles('intro') 
 	const handleEvents = () => { 
 		console.log('next page')
 		setBoton(false)
