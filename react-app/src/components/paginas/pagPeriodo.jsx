@@ -47,6 +47,9 @@ const PagPeriodo = (props) => {
 
 	const [state, setState] = useContext(MyContext);
 	// const [btnCalcular, setBtnCalcular] = useState(true);
+	const executeOneTime = () =>{
+		state.temporalidad == 'mes' ? setHiddenUp(true) : setHiddenUp(false) 
+	}
 
 	const increaseMeses = () =>{
 		setHiddenDown(false)
@@ -109,37 +112,39 @@ const PagPeriodo = (props) => {
 		}else{
 			setYearDinamico(countJahr)
 		}
-
-
+		// state.temporalidad == 'mes' ? setHiddenUp(true) : setHiddenUp(false) 
 	});
 	// BUG
 	// [] Al momento de llegar al ultimo year en temporalidad mensual las flechas mensuales se comportan raro
 
 	return (
 		<div className="Temporalidades periodo">
-			<div className="boton-Mes" >
+			<div className="boton-arrowsUp" >
 				{ (state.temporalidad == 'mes') && <button onClick={ increaseMeses } className="arrow up" style={{opacity: !hiddenUp?1:0}}> </button> } 
-				<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
-				{ <button onClick= { decreaseMeses } className="arrow down" style={{opacity: !hiddenDown?1:0}}></button> } 
 			</div>
-			<div className="boton-Year">
+			<div className="boton-arrowsUpYear" >
 				{ <button onClick={ increaseYear } className="arrow up" style={{opacity: !hiddenUpYear?1:0}}> </button> } 
-				<SetPeriodo className='year' years={ countJahr } />
+			</div>
+			<div className="boton-arrowsDown" >
+				{ <button onClick= { decreaseMeses } className="arrow down" style={{opacity: !hiddenDown?1:0}}></button> } 
 				{ <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down" style={{opacity: !hiddenDownYear?1:0}}></button> } 
 			</div>
-
-			<div className="cambio-automatico-Mes" >
+			<div className="periodo-Fechas" >
+				<div className="periodo-Interactivo" >
+				<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
+				<SetPeriodo className='year' years={ countJahr } />
+			</div>
+				<div className="periodo-NoInteractivo" >
 				{mesRestart
 						? <SetPeriodo setPeriodo={'Mes'} mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[countMeses + 1] } /> 
 						: <SetPeriodo setPeriodo={'Mes'}  mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[0] } />
 				}
-					</div>
-					<div className="cambio-automatico-Year">
 
 						{modeToGetData
 								? <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr } />
 								: <SetPeriodo className='year' setPeriodo={'Ano'} years={ yearDinamico } />
 						}
+							</div>
 							</div>
 								<BtnCalcular mes={ meses[countMeses] } year={ countJahr } />
 
