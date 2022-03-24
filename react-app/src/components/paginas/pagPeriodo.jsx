@@ -7,11 +7,11 @@ import { MyContext  } from "../context";
 import { Msg_GetLasDates } from "../request/sendDatos" 
 import '../styles/periodo.css'
 import { Msg_Niveles } from "../request/sendDatos"
+import Cronometro from "../utilidad/cronometro"
 
 
 const PagPeriodo = (props) => {
 	// [x] Logica de mensual, al llegar el year actual necesitamos poner un seguro en los meses
-	Msg_Niveles('periodo') 
 	const inicioDatos=1969;
 	const meses = [
 		'Enero', 
@@ -43,6 +43,7 @@ const PagPeriodo = (props) => {
 
 	const [mesDinamico, setMesDinamico] = useState('Diciembre')
 	const [yearDinamico, setYearDinamico] = useState(countJahr)
+	
 
 
 	const [state, setState] = useContext(MyContext);
@@ -92,6 +93,9 @@ const PagPeriodo = (props) => {
 	}
 	
 	
+	const [mesDinamic, setMesDinamic] = useState('')	
+	const [yearDinamic, setYearDinamic] = useState('')	
+
 	useEffect(() => {    
 		state.temporalidad == 'year' ? setToGetData(true) : setToGetData(false)	
 		var jahrActual = state.lastYear 
@@ -113,9 +117,21 @@ const PagPeriodo = (props) => {
 			setYearDinamico(countJahr)
 		}
 		// state.temporalidad == 'mes' ? setHiddenUp(true) : setHiddenUp(false) 
+		mesRestart ? setMesDinamic(meses[countMeses + 1]) : setMesDinamic(meses[0])
+		modeToGetData ? setYearDinamic(countJahr) : setYearDinamic(yearDinamico)
+		// console.log(mesDinamic, yearDinamic)
 	});
+
+	useEffect(() => {    
+		setState({ ...state, resetCron: 0 })
+	}, [countJahr, countMeses]);
+
+	useEffect(() => {    
+		Msg_Niveles('periodo') 
+	}, []);
 	// BUG
 	// [] Al momento de llegar al ultimo year en temporalidad mensual las flechas mensuales se comportan raro
+
 
 	return (
 		<div className="Temporalidades periodo">
@@ -146,8 +162,8 @@ const PagPeriodo = (props) => {
 						}
 							</div>
 							</div>
-								<BtnCalcular mes={ meses[countMeses] } year={ countJahr } />
-
+								<BtnCalcular mes={ meses[countMeses] } year={ countJahr } mesDin = { mesDinamic } yearDin = { yearDinamic } />
+								<Cronometro/> 
 						</div>
 
 	)

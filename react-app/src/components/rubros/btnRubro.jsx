@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Msg_Rubros } from '../request/sendDatos' 
 import '../styles/rubros.css'
 import vr1 from '../../assets/videos/Standby.webm'
+import { MyContext  } from "../context";
 
 
 const BtnRubro = () =>{
@@ -22,20 +23,21 @@ const BtnRubro = () =>{
 
 	const [msg, setMsg] = useState('') 
 	const [btnStyle, setStyle] = useState('') 
-	
+
 	const handleBotones = (_index_, textMsg) =>{	
 		setMsg(textMsg)
 		setStyle(rubros[_index_].estilo)
 	}
-	
+
+
+	const [state, setState] = useContext(MyContext);
 	useEffect(()=>{
 		if(msg){
 			console.log(msg)
 			Msg_Rubros(msg)
 		}
-	})
-	// TODO
-	// [] preguntarle a misa como meteria estos videos para no tener que espera a cinthia
+		setState({ ...state, resetCron: 0 })
+	}, [msg])
 
 	return( 
 

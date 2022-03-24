@@ -34,12 +34,15 @@ class rangosDeFechas(Resource):
         try:
             if args['mes'] is not None and args['year'] is not None:
                 # El mensaje trae los dos atributos por lo tanto estamos en modo mensual
-                fixe = [args['mes'], args['year']]
-                setJson.run(config.PATH_JSON, Fecha= '-'.join(fixe))
+                if len(args['mes']) > 2: 
+                    fixe = [args['mes'], args['year']]
+                    print(fixe)
+                    setJson.run(config.PATH_JSON, Fecha= '-'.join(fixe))
                 # Este buscador de rangos no lo voy a ocupar ya que la data sera leida desde Touch
                 # data = buscadorDeRangos.search(args['nameRubro'], jahr=int(args['year']), mes=args['mes']) 
                 return {'statusCode': '200',
-                        'body': json.dumps('El msg se salvo de forma correcta')} 
+                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'data': json.dumps(fixe)} 
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -51,9 +54,11 @@ class setMensualAnual(Resource):
         args = api_call.parse_args()
         try:
             if args['temporalidad'] is not None:
-                setJson.run(config.PATH_JSON, Temporalidad=args['temporalidad'])
+                if len(args['temporalidad']) > 2: 
+                    setJson.run(config.PATH_JSON, Temporalidad=args['temporalidad'])
                 return {'statusCode' : '200',
-                        'body': json.dumps('Mensaje temporalidad salvado')}
+                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'data': json.dumps(args['temporalidad'])} 
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -64,9 +69,11 @@ class setBusqueda(Resource):
         args = api_call.parse_args()
         try:
             if args['nameRubros'] is not None:
-                setJson.run(config.PATH_JSON, Buscador=args['nameRubros'])
+                if len(args['nameRubros']) > 2: 
+                    setJson.run(config.PATH_JSON, Buscador=args['nameRubros'])
                 return {'statusCode' : '200',
-                        'body': json.dumps('Mensaje busqueda salvado')}
+                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'data': json.dumps(args['nameRubros'])} 
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -77,9 +84,11 @@ class setMomentos(Resource):
         args = api_call.parse_args()
         try:
             if args['momentosEspeciales'] is not None:
-                setJson.run(config.PATH_JSON, Especial=args['momentosEspeciales'])
+                if len(args['momentosEspeciales']) > 2: 
+                    setJson.run(config.PATH_JSON, Especial=args['momentosEspeciales'])
                 return {'statusCode' : '200',
-                        'body': json.dumps('Mensaje momentos salvado')}
+                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'data': json.dumps(args['momentosEspeciales'])} 
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -90,9 +99,11 @@ class setNiveles(Resource):
         args = api_call.parse_args()
         try:
             if args['nivel'] is not None:
-                setJson.run(config.PATH_JSON, Nivel=args['nivel'])
+                if len(args['nivel']) > 2: 
+                    setJson.run(config.PATH_JSON, Nivel=args['nivel'])
                 return {'statusCode' : '200',
-                        'body': json.dumps('Mensaje momentos salvado')}
+                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'data': json.dumps(args['nivel'])} 
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -103,9 +114,11 @@ class setSubyacentes(Resource):
         args = api_call.parse_args()
         try:
             if args['subyacente'] is not None:
-                setJson.run(config.PATH_JSON, Subyacentes=args['subyacente'])
+                if len(args['subyacente']) > 2: 
+                    setJson.run(config.PATH_JSON, Subyacentes=args['subyacente'])
                 return {'statusCode' : '200',
-                        'body': json.dumps('Mensaje momentos salvado')}
+                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'data': json.dumps(args['subyacente'])} 
         except TypeError as error:
             return {'statusCode': '400',
                     'body': json.dumps(error)}
@@ -115,14 +128,6 @@ class getData(Resource):
     def post(self):
         args = api_call.parse_args()
         print('getData: {}'.format(args['getLastDates']))
-        # TODO : [Hay que hacerlo cuando nos llegue la base de datos actualizada o 
-        #         estemos en esa parte] 
-        # [x] Consumir el INPC
-        # [x] Consumir los datos subyacentes
-        # [x] Consumir los totales de subyacente y no subyacente en linea 316
-        # [] Consumir los datos de los rubros ya que tambien tienen no solo hay que consumir
-        #    el de los productos
-        # [x] Pensar en que me van agreagar una columna mas entre 1 3
         # ------------------------------------------------------
         data = getLastMonthYear.run(args['getLastDates']) if args['getLastDates'] is not None else '400' 
         # ------------------------------------------------------
@@ -142,13 +147,16 @@ api.add_resource(setSubyacentes, '/subyacentes')
 
 
 if __name__ == '__main__':
-    print('Ejecutando app')
-    # Esta funcion solo se debe ejecutar una vez
-    # y el momento para eso es cuando cambien los csv
-    # del genesis
-    # -------------------------------- 
-    # -------------------------------- 
-    # saveToRubros.run(config.CSV_BASE_INPC)
-    # -------------------------------- 
-    # -------------------------------- 
-    app.run(debug=True)
+    try:
+        print('Ejecutando app')
+        # Esta funcion solo se debe ejecutar una vez
+        # y el momento para eso es cuando cambien los csv
+        # del genesis
+        # -------------------------------- 
+        # -------------------------------- 
+        # saveToRubros.run(config.CSV_BASE_INPC)
+        # -------------------------------- 
+        # -------------------------------- 
+        app.run(debug=True)
+    except TypeError as error:
+        print('ocurrion un error en app.py : {}'.format(error))

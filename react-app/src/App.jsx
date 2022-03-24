@@ -11,6 +11,10 @@ import PagFinal from "./components/paginas/pagFinal"
 
 
 function App() {
+	// TODO
+	// [x] Hacer cronometro
+	// [] Hacer transiciones bonitas entre paginas 
+	// [] Decirle Arte que me pase las imagenes con sus correcciones
 	return (
 		<BrowserRouter>
 			<MyContextProvider>

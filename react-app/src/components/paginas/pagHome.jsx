@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import { useNavigate } from "react-router"
 import standbyVideo from '../../assets/videos/Standby_Home.webm'
 import '../styles/home.css'
 import { Msg_Niveles } from "../request/sendDatos"
+import Cronometro from "../utilidad/cronometro"
 
 
 const PagHome = () => { 
 
 	const navigate = useNavigate()
 	const [boton, setBoton] = useState(true)
-	Msg_Niveles('home')
+
+	useEffect(()=>{
+		Msg_Niveles('home') 
+	},[])
 
 	const handleEvents = () => { 
 		console.log('next page')
@@ -29,6 +33,7 @@ const PagHome = () => {
 					?<div className='botonContinuar normal' onClick={ handleEvents }></div>
 					:<div className='botonContinuar activo' onClick={ handleEvents }></div>
 			}
+			<Cronometro />
 				</div>
 	)
 }

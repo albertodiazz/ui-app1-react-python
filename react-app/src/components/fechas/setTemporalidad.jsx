@@ -18,6 +18,8 @@ const SetTemporalidad = () => {
 	const [boton, setBoton] = useState(true)
 	const [botonAnual, setBotonAnual] = useState(true)
 
+	// BUG
+	// Posible bug ya que estoy mandando los mensajes cada que cambiamos de fecha
 	const handleChange = (arg) => {
 		arg == "mes"? setBoton(false): setBotonAnual(false)
 

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router"
 import '../styles/final.css'
 import { Msg_Niveles } from "../request/sendDatos"
+import Cronometro from "../utilidad/cronometro"
 
 
 const PagFinal = () => { 
-	Msg_Niveles('final') 
 	const navigate = useNavigate()
 	const [botonAbandonar, setAbandonar] = useState(true)
 	const [botonPeriodo, setPeriodo] = useState(true)
@@ -15,6 +15,9 @@ const PagFinal = () => {
 		_which_ == 'abandonar' ? setAbandonar(false) : setAbandonar(true)  
 		
 			}
+	useEffect(()=>{
+		Msg_Niveles('final') 
+	},[])
 	useEffect(()=>{
 		const evento = setTimeout(()=>{
 			if (botonPeriodo == false){
@@ -31,6 +34,7 @@ const PagFinal = () => {
 		<div className='final'>
 			<div className={ botonPeriodo ?'btnPeriodo': 'btnPeriodoActivo'} onClick={ ()=>{ handleEvents('periodo') }}></div>
 			<div className={ botonAbandonar ?'btnAbandonar': 'btnAbandonarActivo'} onClick={ ()=>{ handleEvents('abandonar') }}></div>
+			<Cronometro />
 				</div>
 	)
 }

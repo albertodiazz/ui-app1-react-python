@@ -10,7 +10,7 @@ export default function BtnCalcular(props){
 	const navigate = useNavigate()
 	
 	useEffect (() => { 
-		Msg_RangoFechas(props.mes.slice(0, 3), props.year)
+		Msg_RangoFechas(props.mes.slice(0, 3), props.year + "_" + props.mesDin + props.yearDin)
 	}, [btnCalcular])
 
 	const handleEvents =()=>{

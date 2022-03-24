@@ -3,13 +3,17 @@ import SetTemporalidad from  '../fechas/setTemporalidad'
 import '../styles/temporalidad.css'
 import { useNavigate } from "react-router"
 import { Msg_Niveles } from "../request/sendDatos"
+import Cronometro from "../utilidad/cronometro"
 
 
 const PagTemporalidad = () => {
 	
 	const navigate = useNavigate()
 	const [boton, setBoton] = useState(true)
-	Msg_Niveles('temporalidad')
+
+	useEffect(()=>{
+		Msg_Niveles('temporalidad')
+	},[])
 
 	const handleEvents = () => { 
 		console.log('next page')
@@ -24,6 +28,7 @@ const PagTemporalidad = () => {
 	return (
 		<div className="pagTemporalidad temporalidad">
 			<SetTemporalidad />
+			<Cronometro />
 		</div>
 	)
 }

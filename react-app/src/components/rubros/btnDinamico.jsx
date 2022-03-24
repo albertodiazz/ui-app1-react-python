@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Msg_Momentos, Msg_Subyacente } from '../request/sendDatos' 
+import React, { useContext, useEffect, useState } from 'react'
+import { Msg_Momentos, Msg_Subyacente, Msg_Rubros} from '../request/sendDatos' 
 import '../styles/rubros.css'
 import popUp from '../../assets/07_Pop_Up.png'
 import { useNavigate } from "react-router"
+import { MyContext  } from "../context";
 
 
 const BtnDinamico = () =>{
@@ -16,10 +17,10 @@ const BtnDinamico = () =>{
 	]
  
 	const botonesSub= [
-		{estilo: 'btnSub1', estiloActivo: 'btnSub1Activo'},
-		{estilo: 'btnSub2', estiloActivo: 'btnSub2Activo'},
-		{estilo: 'btnSub3', estiloActivo: 'btnSub3Activo'},
-		{estilo: 'btnSub4', estiloActivo: 'btnSub4Activo'}
+		{estilo: 'btnSub1', estiloActivo: 'btnSub1Activo', msg: 'seccion1'},
+		{estilo: 'btnSub2', estiloActivo: 'btnSub2Activo', msg: 'seccion2'},
+		{estilo: 'btnSub3', estiloActivo: 'btnSub3Activo', msg: 'seccion3'},
+		{estilo: 'btnSub4', estiloActivo: 'btnSub4Activo', msg: 'seccion4'}
 	]
 
 	const [msg, setMsg] = useState('') 
@@ -46,18 +47,19 @@ const BtnDinamico = () =>{
 		else if (_index_ == 0){
 			setTimeout(() =>{
 				navigate('/pagTemporalidad')
+				Msg_Rubros('')
 			}, 200)
 		}
 		else if (_index_ == 1){
 			setTimeout(() =>{
 				navigate('/pagFinal')
+				Msg_Rubros('')
 			}, 200)
 		}
 	}
 
-	const handleSub = (_index_) =>{	
-		let indexSum = parseInt(_index_) + 1
-		setMsgSub(indexSum.toString())
+	const handleSub = (_index_, _msg_) =>{	
+		setMsgSub(_msg_)
 		setStyleSub(botonesSub[_index_].estilo)
 	}
 
@@ -67,22 +69,27 @@ const BtnDinamico = () =>{
 			setClose(true)
 			setStyle('')
 			setStyleSub('')
-			Msg_Momentos('') 
+			Msg_Momentos('Nada') 
 		}, 200)
 		setTimeout(() =>{
 			setClose(true)
 			setStyle('')
 			setStyleSub('')
-			Msg_Subyacente('0') 
-		}, 20)
+			Msg_Subyacente('Nada') 
+		}, 100)
 	
 	}
 
 	useEffect(()=>{
-		// console.log(msg)
 		!close ? Msg_Subyacente(msgSub) : Msg_Subyacente('0')  
 		
 	}, [msgSub, msg])
+
+	const [state, setState] = useContext(MyContext);
+	useEffect(() => {    
+		setState({ ...state, resetCron: 0 })
+	},[msgSub, msg, close]);
+
 
 	return( 
 		<div className='btnDinamico'>
@@ -95,7 +102,7 @@ const BtnDinamico = () =>{
 					<div className={ styleClose? 'btnClose': 'btnCloseActivo'}  onClick={ closePopup } />
 					<div className='btnSubyacentes' >
 						{botonesSub.map((boton, index) => (
-							<div className={ boton.estilo == btnStyleSub ? boton.estiloActivo : boton.estilo } key={ index } onClick={ ()=> handleSub(`${ index }`) }/>
+							<div className={ boton.estilo == btnStyleSub ? boton.estiloActivo : boton.estilo } key={ index } onClick={ ()=> handleSub(`${ index }`, boton.msg) }/>
 						) )}
 					</div>
 				</div>

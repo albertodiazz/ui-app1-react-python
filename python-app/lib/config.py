@@ -4,3 +4,5 @@ INPC_ANUAL = '/mnt/d/trabajo/cocay/ramodelacion_Mide/2_4_mide_inflacion/python-a
 PATH_SAVE_RUBROS = 'data/rubros/'
 
 PATH_JSON = 'data/json/request.json'
+PATH_TXT = 'data/json/request.txt'
+

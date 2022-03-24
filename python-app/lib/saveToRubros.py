@@ -20,8 +20,6 @@ def get_Rubros(path, fixeData=3):
                         columnas(son los meses), producto(nombre), valores]
 
     '''
-    # TODO
-    # [] Los datos del rubro12 tienen datos de mas que son los nuevos hay que quitar eso
     df = pd.read_csv(path, index_col=0, usecols=lambda c: not c.startswith('Unnamed:'))
     
     NameRubros, Posicion = [], [] 
@@ -112,8 +110,6 @@ def saveInpc(_path_, _type_):
 
 
 def saveSubyacente(_path_, _type_):
-    # TODO
-    # [] Integrar la data con TouchDesigner y corroborrar que todo este bien 
     df = pd.read_csv(_path_, index_col=0, usecols=lambda c: not c.startswith('Unnamed:'))
     # toSave = df.loc[df.index[0]]
     toSave = df.loc[df.index == 'Subyacente ']
