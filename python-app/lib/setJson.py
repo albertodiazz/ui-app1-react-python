@@ -1,7 +1,13 @@
+'''[Por el momentos no estoy utilizando esta programacion ya que me causaba un bug
+al guardar varios json de forma simultanea mejor opte por salvar un archivo json por 
+mensaje]'''
+
 import json
 import ast
 from lib import config
+import queue
 
+config.safeJson = 0
 
 def run(_pathJson_, **kwargs):
     try:
@@ -13,13 +19,15 @@ def run(_pathJson_, **kwargs):
                     data[key] = value 
                     fixe.write(json.dumps(data))
                     fixe.close()
-                    with open(_pathJson_, 'w') as f:
-                        json.dump(data, f)
+                    config.safeJson += 1
+                    print('{} >>>>>>>>>>>>>>>>> {}'.format(config.safeJson, data))
+        with open(_pathJson_, 'w') as f:
+            json.dump(data, f)
         f.close()
         # Forzamos el error para que levante la excepcion y lo haga en automatico
-        force = open(_pathJson_)
-        dataForce = json.load(force)
-        force.close()
+        # force = open(_pathJson_)
+        # dataForce = json.load(force)
+        # force.close()
     except json.JSONDecodeError:
         try:
             f.close()
@@ -38,9 +46,4 @@ def run(_pathJson_, **kwargs):
             fixe.close()
         except TypeError as error:
             print('Excepcion en setJson :'.format(error))
-        # BUG
-        # TODO
-        # [] Aun sucede un bug de que no encuentra el sub_str sin embargo 
-        # al presionar algun boton se resuelve lo dejare en pendiente
-        # para avanzar con toda la app
     return 

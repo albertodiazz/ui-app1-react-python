@@ -4,9 +4,8 @@ import SetPeriodo from  '../fechas/setPeriodo'
 import SetTemporalidad from  '../fechas/setTemporalidad'
 import BtnCalcular from  '../fechas/btnCalcular'
 import { MyContext  } from "../context";
-import { Msg_GetLasDates } from "../request/sendDatos" 
 import '../styles/periodo.css'
-import { Msg_Niveles } from "../request/sendDatos"
+import { Msg_Niveles, Msg_GetLasDates } from "../request/sendDatos"
 import Cronometro from "../utilidad/cronometro"
 
 

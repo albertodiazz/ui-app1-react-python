@@ -17,7 +17,7 @@
 	display: flex;
 	justify-content: space-between ;
 	align-items: center;
-	border: 2px solid green;
+	/* border: 2px solid green; */
 	left: 390px; top: 250px;
 	margin-top: 13%;
 }
@@ -26,7 +26,7 @@
 	display: flex;
 	justify-content: space-between ;
 	align-items: center;
-	border: 2px solid green;
+	/* border: 2px solid green; */
 	margin-left: 50px;
 	font-size: 20px;
 }
@@ -35,7 +35,7 @@
 	display: flex;
 	justify-content: space-between ;
 	align-items: center;
-	border: 2px solid green;
+	/* border: 2px solid green; */
 	margin-right: 20px;
 	font-size: 20px;
 }
@@ -45,7 +45,7 @@
 	display: flex;
 	justify-content: space-between ;
 	align-items: center;
-	border: 2px solid green;
+	/* border: 2px solid green; */
 	left: 456px; top: 180px;
 	margin-top: 15%;
 }
@@ -55,7 +55,7 @@
 	display: flex;
 	justify-content: space-between ;
 	align-items: center;
-	border: 2px solid green;
+	/* border: 2px solid green; */
 	left: 592px; top: 180px;
 	margin-top: 15%;
 }
@@ -65,7 +65,7 @@
 	display: flex;
 	justify-content: space-between ;
 	align-items: center;
-	border: 2px solid green;
+	/* border: 2px solid green; */
 	left: 456px; top: 260px;
 	margin-top: 15%;
 }

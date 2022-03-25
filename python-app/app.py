@@ -37,11 +37,13 @@ class rangosDeFechas(Resource):
                 if len(args['mes']) > 2: 
                     fixe = [args['mes'], args['year']]
                     print(fixe)
-                    setJson.run(config.PATH_JSON, Fecha= '-'.join(fixe))
+                    # setJson.run(config.PATH_JSON, Fecha= '-'.join(fixe))
+                    with open(config.PATH_JSONS + 'Fecha.json', 'w') as f:
+                        json.dump({'Fecha': '-'.join(fixe)}, f)
                 # Este buscador de rangos no lo voy a ocupar ya que la data sera leida desde Touch
                 # data = buscadorDeRangos.search(args['nameRubro'], jahr=int(args['year']), mes=args['mes']) 
                 return {'statusCode': '200',
-                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'body': json.dumps('El msg rangosDeFechas se salvo de forma correcta'),
                         'data': json.dumps(fixe)} 
         except TypeError as error:
             return {'statusCode': '400',
@@ -55,9 +57,11 @@ class setMensualAnual(Resource):
         try:
             if args['temporalidad'] is not None:
                 if len(args['temporalidad']) > 2: 
-                    setJson.run(config.PATH_JSON, Temporalidad=args['temporalidad'])
+                    # setJson.run(config.PATH_JSON, Temporalidad=args['temporalidad'])
+                    with open(config.PATH_JSONS + 'Temporalidad.json', 'w') as f:
+                        json.dump({'Temporalidad': args['temporalidad']}, f)
                 return {'statusCode' : '200',
-                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'body': json.dumps('El msg setMensualAnual se salvo de forma correcta'),
                         'data': json.dumps(args['temporalidad'])} 
         except TypeError as error:
             return {'statusCode': '400',
@@ -70,9 +74,11 @@ class setBusqueda(Resource):
         try:
             if args['nameRubros'] is not None:
                 if len(args['nameRubros']) > 2: 
-                    setJson.run(config.PATH_JSON, Buscador=args['nameRubros'])
+                    # setJson.run(config.PATH_JSON, Buscador=args['nameRubros'])
+                    with open(config.PATH_JSONS + 'Buscador.json', 'w') as f:
+                        json.dump({'Buscador': args['nameRubros']}, f)
                 return {'statusCode' : '200',
-                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'body': json.dumps('El msg setBusqueda se salvo de forma correcta'),
                         'data': json.dumps(args['nameRubros'])} 
         except TypeError as error:
             return {'statusCode': '400',
@@ -85,9 +91,11 @@ class setMomentos(Resource):
         try:
             if args['momentosEspeciales'] is not None:
                 if len(args['momentosEspeciales']) > 2: 
-                    setJson.run(config.PATH_JSON, Especial=args['momentosEspeciales'])
+                    # setJson.run(config.PATH_JSON, Especial=args['momentosEspeciales'])
+                    with open(config.PATH_JSONS + 'Especial.json', 'w') as f:
+                        json.dump({'Especial': args['momentosEspeciales']}, f)
                 return {'statusCode' : '200',
-                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'body': json.dumps('El msg setMomentos se salvo de forma correcta'),
                         'data': json.dumps(args['momentosEspeciales'])} 
         except TypeError as error:
             return {'statusCode': '400',
@@ -100,9 +108,11 @@ class setNiveles(Resource):
         try:
             if args['nivel'] is not None:
                 if len(args['nivel']) > 2: 
-                    setJson.run(config.PATH_JSON, Nivel=args['nivel'])
+                    # setJson.run(config.PATH_JSONS, Nivel=args['nivel'])
+                    with open(config.PATH_JSONS + 'Nivel.json', 'w') as f:
+                        json.dump({'Nivel': args['nivel']}, f)
                 return {'statusCode' : '200',
-                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'body': json.dumps('El msg setNiveles se salvo de forma correcta'),
                         'data': json.dumps(args['nivel'])} 
         except TypeError as error:
             return {'statusCode': '400',
@@ -115,9 +125,11 @@ class setSubyacentes(Resource):
         try:
             if args['subyacente'] is not None:
                 if len(args['subyacente']) > 2: 
-                    setJson.run(config.PATH_JSON, Subyacentes=args['subyacente'])
+                    # setJson.run(config.PATH_JSON, Subyacentes=args['subyacente'])
+                    with open(config.PATH_JSONS + 'Subyacentes.json', 'w') as f:
+                        json.dump({'Subyacentes': args['subyacente']}, f)
                 return {'statusCode' : '200',
-                        'body': json.dumps('El msg se salvo de forma correcta'),
+                        'body': json.dumps('El msg setSubyacentes se salvo de forma correcta'),
                         'data': json.dumps(args['subyacente'])} 
         except TypeError as error:
             return {'statusCode': '400',

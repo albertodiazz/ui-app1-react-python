@@ -5,4 +5,6 @@ PATH_SAVE_RUBROS = 'data/rubros/'
 
 PATH_JSON = 'data/json/request.json'
 PATH_TXT = 'data/json/request.txt'
+PATH_JSONS = 'data/json/'
 
+safeJson = 0
