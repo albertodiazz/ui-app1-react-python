@@ -2,10 +2,13 @@
   "name": "react-app",
   "private": true,
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:start": "electron .",
+    "app": "vite & electron ."
   },
   "dependencies": {
     "react": "^17.0.2",
@@ -15,6 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "@vitejs/plugin-react": "^1.0.7",
+    "electron": "^17.2.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-config-standard": "^16.0.3",
