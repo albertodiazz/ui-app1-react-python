@@ -110,6 +110,10 @@ def saveInpc(_path_, _type_):
 
 
 def saveSubyacente(_path_, _type_):
+    # IMPORTANTE con la data que almacenen en la columan B ya que es la primera que se encuentra
+    # despues de nuestros rubros y productos ya que la estoy eliminando con la funcion lambda 
+    # entonces no hay que poner nada ahi ni tampoco hay que quitarla de forma manual ya que si no 
+    # tendria que modificar mi funcion
     df = pd.read_csv(_path_, index_col=0, usecols=lambda c: not c.startswith('Unnamed:'))
     # toSave = df.loc[df.index[0]]
     toSave = df.loc[df.index == 'Subyacente ']
@@ -118,10 +122,20 @@ def saveSubyacente(_path_, _type_):
     return df 
 
 
+def saveTotales(_path_, _type_):
+    # Esta funcion esta disenada para obtener los dos ultimos datos colados en mensual y anual que
+    # serian los toal de genericos subyacente e inflacion no subyacente
+    df = pd.read_csv(_path_, index_col=0)
+    toSave = df.iloc[-2: , 0]
+    toSave.to_csv(config.PATH_SAVE_RUBROS + _type_ + '/' + 'totales' + '.csv')
+    print('Se salvaron los totales')
+    return df 
+
+
 def run(path, _type_):
     '''
     [Args]
-        [path : str] : [path de nuestro CSV Base_INPC_1969_2021]
+        [path : str] : [path de nuestro CSV INPC_MENSUAL or INPC_ANUAL]
         [_type_: str] : [seteamos si queremos hacer un update 
                         de los datos mensual y anual]
     '''
@@ -132,6 +146,7 @@ def run(path, _type_):
         saveRubros(x, y, _type_)
         saveSubyacente(path, _type_)
         saveInpc(path, _type_)
+        saveTotales(path, _type_)
         # ----------------------------------
         # ----------------------------------
         # ----------------------------------
