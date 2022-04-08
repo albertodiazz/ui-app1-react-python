@@ -247,8 +247,8 @@ if __name__ == '__main__':
         # -------------------------------- 
         # -------------------------------- 
         # saveToRubros.run(config.CSV_BASE_INPC)
-        # saveToRubros.run(config.INPC_MENSUAL, 'mensual')
-        # saveToRubros.run(config.INPC_ANUAL, 'anual')
+        saveToRubros.run(config.INPC_MENSUAL, 'mensual')
+        saveToRubros.run(config.INPC_ANUAL, 'anual')
         # -------------------------------- 
         # -------------------------------- 
         # app.run(debug=True)
