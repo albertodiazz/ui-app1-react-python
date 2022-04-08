@@ -8,3 +8,14 @@ PATH_TXT = 'data/json/request.txt'
 PATH_JSONS = 'data/json/'
 
 safeJson = 0
+
+DATA_TO_FRONT = {
+    'fechas': '',
+    'get_last': '',
+    'mensualAnual': '',
+    'busqueda': '',
+    'momentos': '',
+    'niveles': '',
+    'subyacentes': ''
+}
+
