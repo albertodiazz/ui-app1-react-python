@@ -152,15 +152,19 @@ const PagPeriodo = (props) => {
 				{ <button onClick= { () => decreaseYear(inicioDatos) } className="arrow down" style={{opacity: !hiddenDownYear?1:0}}></button> } 
 			</div>
 			<div className="periodo-Fechas" >
-				<div className="periodo-Interactivo" >
+				<div className="periodo-InteractivoMes" >
 				<SetPeriodo setPeriodo={'Mes'} meses={ meses[countMeses] } />
+			</div>
+				<div className="periodo-InteractivoYear" >
 				<SetPeriodo className='year' years={ countJahr } />
 			</div>
-				<div className="periodo-NoInteractivo" >
+				<div className="periodo-NoInteractivoMes" >
 				{mesRestart
 						? <SetPeriodo setPeriodo={'Mes'} mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[countMeses + 1] } /> 
 						: <SetPeriodo setPeriodo={'Mes'}  mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[0] } />
 				}
+							</div>
+				<div className="periodo-NoInteractivoYear" >
 
 						{modeToGetData
 								? <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr + 1} />
