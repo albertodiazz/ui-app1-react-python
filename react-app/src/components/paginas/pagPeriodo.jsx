@@ -40,7 +40,7 @@ const PagPeriodo = (props) => {
 	const [hiddenUpYear, setHiddenUpYear] = useState(false)
 	const [hiddenDownYear, setHiddenDownYear] = useState(true)
 
-	const [mesDinamico, setMesDinamico] = useState('Diciembre')
+	const [mesDinamico, setMesDinamico] = useState('Enero')
 	const [yearDinamico, setYearDinamico] = useState(countJahr)
 	
 
@@ -81,7 +81,7 @@ const PagPeriodo = (props) => {
 		var jahrActual = state.lastYear 
 		countJahr >= jahrActual ? setCount(jahrActual) : setCount(countJahr + 1)
 		countJahr >= jahrActual - 1 ? setHiddenUpYear(true) : setHiddenUpYear(false)
-		countJahr >= jahrActual - 1 ? setMesDinamico(state.lastMonth) : setMesDinamico('Diciembre') 
+		countJahr >= jahrActual - 1 ? setMesDinamico(state.lastMonth) : setMesDinamico('Enero') 
 	}
 
 	const decreaseYear = (_inicio_) =>{
@@ -96,6 +96,7 @@ const PagPeriodo = (props) => {
 	const [yearDinamic, setYearDinamic] = useState('')	
 
 	useEffect(() => {    
+		console.log(mesDinamic)
 		state.temporalidad == 'year' ? setToGetData(true) : setToGetData(false)	
 		var jahrActual = state.lastYear 
 		var getIndex = meses.findIndex(res => res === state.lastMonth)
@@ -116,7 +117,13 @@ const PagPeriodo = (props) => {
 			setYearDinamico(countJahr)
 		}
 		// state.temporalidad == 'mes' ? setHiddenUp(true) : setHiddenUp(false) 
+		if(modeToGetData)
+		{
+		mesRestart ? setMesDinamic(meses[countMeses ]) : setMesDinamic(meses[0])
+		}else
+		{
 		mesRestart ? setMesDinamic(meses[countMeses + 1]) : setMesDinamic(meses[0])
+		}
 		modeToGetData ? setYearDinamic(countJahr) : setYearDinamic(yearDinamico)
 		// console.log(mesDinamic, yearDinamic)
 	});
@@ -156,12 +163,15 @@ const PagPeriodo = (props) => {
 				}
 
 						{modeToGetData
-								? <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr } />
+								? <SetPeriodo className='year' setPeriodo={'Ano'} years={ countJahr + 1} />
 								: <SetPeriodo className='year' setPeriodo={'Ano'} years={ yearDinamico } />
 						}
 							</div>
 							</div>
-								<BtnCalcular mes={ meses[countMeses] } year={ countJahr } mesDin = { mesDinamic } yearDin = { yearDinamic } />
+						{modeToGetData
+								? <BtnCalcular mes={ meses[countMeses] } year={ countJahr } mesDin = { mesDinamic } yearDin = { yearDinamic + 1 } />
+								: <BtnCalcular mes={ meses[countMeses] } year={ countJahr } mesDin = { mesDinamic } yearDin = { yearDinamic } />
+						}
 								<Cronometro/> 
 						</div>
 
