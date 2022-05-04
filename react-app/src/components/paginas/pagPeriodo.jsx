@@ -42,6 +42,7 @@ const PagPeriodo = (props) => {
 
 	const [mesDinamico, setMesDinamico] = useState('Enero')
 	const [yearDinamico, setYearDinamico] = useState(countJahr)
+	const [seguroYearDinamico, setseguroYearDinamico] = useState(false)
 	
 
 
@@ -80,13 +81,16 @@ const PagPeriodo = (props) => {
 		// OJO aqui estamos agarrando el ultimo dato del yeari seteado en su csv
 		var jahrActual = state.lastYear 
 		countJahr >= jahrActual ? setCount(jahrActual) : setCount(countJahr + 1)
-		countJahr >= jahrActual - 1 ? setHiddenUpYear(true) : setHiddenUpYear(false)
+
+		countJahr + 1 >= jahrActual - 1 ? setHiddenUpYear(true) : setHiddenUpYear(false)
+		countJahr + 1 >= jahrActual - 1 ? setseguroYearDinamico(true) : setseguroYearDinamico(false)
 		countJahr >= jahrActual - 1 ? setMesDinamico(state.lastMonth) : setMesDinamico('Enero') 
 	}
 
 	const decreaseYear = (_inicio_) =>{
 		setHiddenUpYear(false)
 		setMesDinamico('Diciembre')
+		setseguroYearDinamico(false)
 		countJahr <= _inicio_ ? setCount(_inicio_) : setCount(countJahr - 1)
 		countJahr <= _inicio_ + 1 ? setHiddenDownYear(true) : setHiddenDownYear(false)
 	}
@@ -138,14 +142,14 @@ const PagPeriodo = (props) => {
 	// BUG
 	// [] Al momento de llegar al ultimo year en temporalidad mensual las flechas mensuales se comportan raro
 
-
+	// console.log(seguroYearDinamico)
 	return (
 		<div className="Temporalidades periodo">
 			<div className="boton-arrowsUp" >
-				{ (state.temporalidad == 'mes') && <button onClick={ increaseMeses } className="arrow up" style={{opacity: !hiddenUp?1:0}}> </button> } 
+				{ (!hiddenUp) &&  <button onClick={ increaseMeses } className="arrow up" style={{opacity: !hiddenUp?1:0}}> </button> } 
 			</div>
 			<div className="boton-arrowsUpYear" >
-				{ <button onClick={ increaseYear } className="arrow up" style={{opacity: !hiddenUpYear?1:0}}> </button> } 
+				{ (!seguroYearDinamico) && <button onClick={ increaseYear } className="arrow up" style={{opacity: !hiddenUpYear?1:0}}> </button> } 
 			</div>
 			<div className="boton-arrowsDown" >
 				{ <button onClick= { decreaseMeses } className="arrow down" style={{opacity: !hiddenDown?1:0}}></button> } 
@@ -159,9 +163,9 @@ const PagPeriodo = (props) => {
 				<SetPeriodo className='year' years={ countJahr } />
 			</div>
 				<div className="periodo-NoInteractivoMes" >
-				{mesRestart
-						? <SetPeriodo setPeriodo={'Mes'} mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[countMeses + 1] } /> 
-						: <SetPeriodo setPeriodo={'Mes'}  mode= {modeToGetData} lastMes= { mesDinamico } meses={ meses[0] } />
+				{modeToGetData
+						? <SetPeriodo setPeriodo={'Mes'}  meses={ meses[countMeses]  } />
+						: <SetPeriodo setPeriodo={'Mes'}   meses={ meses[countMeses+ 1] } /> 
 				}
 							</div>
 				<div className="periodo-NoInteractivoYear" >
